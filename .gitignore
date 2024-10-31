@@ -27,6 +27,7 @@ dist-ssr
 .amplify
 amplify_outputs*
 amplifyconfiguration*
+/src/ui-components/
 
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
