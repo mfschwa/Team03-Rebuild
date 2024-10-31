@@ -9,8 +9,8 @@ import App from './App'
 Amplify.configure({
   Auth: {
     Cognito: {
-      userPoolId: 'us-east-1_zuWPPSmp4',      
-      userPoolClientId: '48jmdql83vacocmn8shr4n5odf',
+      userPoolId: 'us-east-1_30MDJhjDj',      
+      userPoolClientId: '4uslrmlurtmufb4l7bdgs5or6e',
     }
   }
 });
@@ -26,15 +26,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
               return (
                 <>
                   <Authenticator.SignUp.FormFields />
-                  <div>
-                    <label htmlFor="preferred_username">Preferred Username</label>
-                    <input
-                      id="preferred_username"
-                      name="custom:preferred_username"
-                      placeholder="Preferred Username"
-                      required={true}
-                    />
-                  </div>
                   <div>
                     <label htmlFor="email">Email</label>
                     <input
