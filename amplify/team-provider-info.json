@@ -19,6 +19,9 @@
           "userPoolName": "Team03-UserPool",
           "webClientId": "48jmdql83vacocmn8shr4n5odf"
         }
+      },
+      "api": {
+        "team03rebuild": {}
       }
     }
   }
