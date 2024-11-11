@@ -2,31 +2,44 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
-type Driver @model {
+type User @model {
   id: ID!
-  name: String!
+  username: String!
+  email: String!
+  role: UserRole! # "admin", "driver", "sponsor"
+  
+  # Driver-specific fields
   sponsor: Sponsor @belongsTo
-  points: Int!
+  points: Int
   pointHistory: [PointHistory] @hasMany
-  profile: DriverProfile @hasOne
+  driverProfile: DriverProfile @hasOne
   purchases: [Purchase] @hasMany
+
+  # Admin-specific fields
+  adminProfile: AdminProfile @hasOne
+  adminReports: [Report] @hasMany
+
+  # Sponsor-specific fields
+  sponsoredDrivers: [DriverProfile] @hasMany
+  productCatalog: [Product] @hasMany
+  pointConversionRate: Float
+  sponsorReports: [Report] @hasMany
+}
+
+# Enum to Define User Roles
+enum UserRole {
+  ADMIN
+  DRIVER
+  SPONSOR
 }
 
 type Sponsor @model {
   id: ID!
   name: String!
   productCatalog: [Product] @hasMany
-  drivers: [Driver] @hasMany
   pointConversionRate: Float! # Conversion rate from dollars to points
-  sponsorUsers: [SponsorUser] @hasMany
+  users: [User] @hasMany # Sponsors can have multiple users (drivers and sponsor users)
   reports: [Report] @hasMany
-}
-
-type SponsorUser @model {
-  id: ID!
-  username: String!
-  sponsor: Sponsor @belongsTo
-  role: String! # Define roles within Sponsor (Admin, Manager, etc.)
 }
 
 type Product @model {
@@ -35,40 +48,36 @@ type Product @model {
   description: String!
   price: Float!
   pointsValue: Int! # Calculated based on pointConversionRate
-  sponsor: Sponsor @belongsTo
+  purchases: [Purchase] @hasMany # Establish relationship with Purchase
 }
 
 type Purchase @model {
   id: ID!
-  driver: Driver @belongsTo
+  user: User @belongsTo # Associated with a User
+  product: Product @belongsTo(fields: ["productID"]) # Establish relationship with Product
+  productID: ID! # Foreign key for Product
   status: String! # (e.g., "Pending", "Completed", "Cancelled")
   purchaseDate: AWSDateTime!
 }
 
+
 type PointHistory @model {
   id: ID!
-  driver: Driver @belongsTo
+  user: User @belongsTo # Associated with User instead of Driver
   date: AWSDateTime!
   pointsChange: Int!
   reason: String!
 }
 
-type Administrator @model {
-  id: ID!
-  username: String!
-  profile: AdminProfile @hasOne
-  reports: [Report] @hasMany
-}
-
 type AdminProfile @model {
   id: ID!
-  administrator: Administrator @belongsTo
+  user: User @belongsTo # Associated with a User instead of Administrator
   contactEmail: String!
 }
 
 type DriverProfile @model {
   id: ID!
-  driver: Driver @belongsTo
+  user: User @belongsTo # Associated with a User instead of Driver
   contactEmail: String!
   applicationStatus: String! # (e.g., "Pending", "Accepted", "Rejected")
 }
@@ -76,7 +85,7 @@ type DriverProfile @model {
 type Report @model {
   id: ID!
   type: String! # (e.g., "Driver Point Tracking", "Sales by Sponsor")
-  generatedBy: Administrator @belongsTo
+  generatedBy: User @belongsTo # Associated with a User instead of Administrator
   sponsor: Sponsor @belongsTo
   dateRangeStart: AWSDateTime
   dateRangeEnd: AWSDateTime

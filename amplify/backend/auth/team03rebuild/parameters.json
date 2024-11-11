@@ -4,16 +4,10 @@
   "serviceType": "imported",
   "region": "us-east-1",
   "aliasAttributes": [
-    "email",
-    "phone_number",
-    "preferred_username"
+    "email"
   ],
   "authProvidersUserPool": [],
-  "requiredAttributes": [
-    "preferred_username",
-    "email",
-    "name"
-  ],
+  "requiredAttributes": [],
   "passwordPolicyMinLength": 8,
   "passwordPolicyCharacters": [
     "Requires Lowercase",

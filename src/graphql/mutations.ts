@@ -8,101 +8,234 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
-export const createDriver = /* GraphQL */ `mutation CreateDriver(
-  $input: CreateDriverInput!
-  $condition: ModelDriverConditionInput
+export const createBlog = /* GraphQL */ `mutation CreateBlog(
+  $input: CreateBlogInput!
+  $condition: ModelBlogConditionInput
 ) {
-  createDriver(input: $input, condition: $condition) {
+  createBlog(input: $input, condition: $condition) {
     id
     name
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
-      __typename
-    }
-    points
-    pointHistory {
-      nextToken
-      __typename
-    }
-    profile {
-      id
-      contactEmail
-      applicationStatus
-      createdAt
-      updatedAt
-      driverProfileDriverId
-      __typename
-    }
-    purchases {
+    posts {
       nextToken
       __typename
     }
     createdAt
     updatedAt
-    sponsorDriversId
-    driverProfileId
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.CreateDriverMutationVariables,
-  APITypes.CreateDriverMutation
+  APITypes.CreateBlogMutationVariables,
+  APITypes.CreateBlogMutation
 >;
-export const updateDriver = /* GraphQL */ `mutation UpdateDriver(
-  $input: UpdateDriverInput!
-  $condition: ModelDriverConditionInput
+export const updateBlog = /* GraphQL */ `mutation UpdateBlog(
+  $input: UpdateBlogInput!
+  $condition: ModelBlogConditionInput
 ) {
-  updateDriver(input: $input, condition: $condition) {
+  updateBlog(input: $input, condition: $condition) {
     id
     name
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
-      __typename
-    }
-    points
-    pointHistory {
-      nextToken
-      __typename
-    }
-    profile {
-      id
-      contactEmail
-      applicationStatus
-      createdAt
-      updatedAt
-      driverProfileDriverId
-      __typename
-    }
-    purchases {
+    posts {
       nextToken
       __typename
     }
     createdAt
     updatedAt
-    sponsorDriversId
-    driverProfileId
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.UpdateDriverMutationVariables,
-  APITypes.UpdateDriverMutation
+  APITypes.UpdateBlogMutationVariables,
+  APITypes.UpdateBlogMutation
 >;
-export const deleteDriver = /* GraphQL */ `mutation DeleteDriver(
-  $input: DeleteDriverInput!
-  $condition: ModelDriverConditionInput
+export const deleteBlog = /* GraphQL */ `mutation DeleteBlog(
+  $input: DeleteBlogInput!
+  $condition: ModelBlogConditionInput
 ) {
-  deleteDriver(input: $input, condition: $condition) {
+  deleteBlog(input: $input, condition: $condition) {
     id
     name
+    posts {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteBlogMutationVariables,
+  APITypes.DeleteBlogMutation
+>;
+export const createPost = /* GraphQL */ `mutation CreatePost(
+  $input: CreatePostInput!
+  $condition: ModelPostConditionInput
+) {
+  createPost(input: $input, condition: $condition) {
+    id
+    title
+    blog {
+      id
+      name
+      createdAt
+      updatedAt
+      __typename
+    }
+    comments {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    blogPostsId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreatePostMutationVariables,
+  APITypes.CreatePostMutation
+>;
+export const updatePost = /* GraphQL */ `mutation UpdatePost(
+  $input: UpdatePostInput!
+  $condition: ModelPostConditionInput
+) {
+  updatePost(input: $input, condition: $condition) {
+    id
+    title
+    blog {
+      id
+      name
+      createdAt
+      updatedAt
+      __typename
+    }
+    comments {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    blogPostsId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdatePostMutationVariables,
+  APITypes.UpdatePostMutation
+>;
+export const deletePost = /* GraphQL */ `mutation DeletePost(
+  $input: DeletePostInput!
+  $condition: ModelPostConditionInput
+) {
+  deletePost(input: $input, condition: $condition) {
+    id
+    title
+    blog {
+      id
+      name
+      createdAt
+      updatedAt
+      __typename
+    }
+    comments {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    blogPostsId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeletePostMutationVariables,
+  APITypes.DeletePostMutation
+>;
+export const createComment = /* GraphQL */ `mutation CreateComment(
+  $input: CreateCommentInput!
+  $condition: ModelCommentConditionInput
+) {
+  createComment(input: $input, condition: $condition) {
+    id
+    post {
+      id
+      title
+      createdAt
+      updatedAt
+      blogPostsId
+      __typename
+    }
+    content
+    createdAt
+    updatedAt
+    postCommentsId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateCommentMutationVariables,
+  APITypes.CreateCommentMutation
+>;
+export const updateComment = /* GraphQL */ `mutation UpdateComment(
+  $input: UpdateCommentInput!
+  $condition: ModelCommentConditionInput
+) {
+  updateComment(input: $input, condition: $condition) {
+    id
+    post {
+      id
+      title
+      createdAt
+      updatedAt
+      blogPostsId
+      __typename
+    }
+    content
+    createdAt
+    updatedAt
+    postCommentsId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateCommentMutationVariables,
+  APITypes.UpdateCommentMutation
+>;
+export const deleteComment = /* GraphQL */ `mutation DeleteComment(
+  $input: DeleteCommentInput!
+  $condition: ModelCommentConditionInput
+) {
+  deleteComment(input: $input, condition: $condition) {
+    id
+    post {
+      id
+      title
+      createdAt
+      updatedAt
+      blogPostsId
+      __typename
+    }
+    content
+    createdAt
+    updatedAt
+    postCommentsId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteCommentMutationVariables,
+  APITypes.DeleteCommentMutation
+>;
+export const createUser = /* GraphQL */ `mutation CreateUser(
+  $input: CreateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  createUser(input: $input, condition: $condition) {
+    id
+    username
+    email
+    role
     sponsor {
       id
       name
@@ -116,29 +249,202 @@ export const deleteDriver = /* GraphQL */ `mutation DeleteDriver(
       nextToken
       __typename
     }
-    profile {
+    driverProfile {
       id
       contactEmail
       applicationStatus
       createdAt
       updatedAt
-      driverProfileDriverId
+      userSponsoredDriversId
+      driverProfileUserId
       __typename
     }
     purchases {
       nextToken
       __typename
     }
+    adminProfile {
+      id
+      contactEmail
+      createdAt
+      updatedAt
+      adminProfileUserId
+      __typename
+    }
+    adminReports {
+      nextToken
+      __typename
+    }
+    sponsoredDrivers {
+      nextToken
+      __typename
+    }
+    productCatalog {
+      nextToken
+      __typename
+    }
+    pointConversionRate
+    sponsorReports {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
-    sponsorDriversId
-    driverProfileId
+    sponsorUsersId
+    userDriverProfileId
+    userAdminProfileId
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.DeleteDriverMutationVariables,
-  APITypes.DeleteDriverMutation
+  APITypes.CreateUserMutationVariables,
+  APITypes.CreateUserMutation
+>;
+export const updateUser = /* GraphQL */ `mutation UpdateUser(
+  $input: UpdateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  updateUser(input: $input, condition: $condition) {
+    id
+    username
+    email
+    role
+    sponsor {
+      id
+      name
+      pointConversionRate
+      createdAt
+      updatedAt
+      __typename
+    }
+    points
+    pointHistory {
+      nextToken
+      __typename
+    }
+    driverProfile {
+      id
+      contactEmail
+      applicationStatus
+      createdAt
+      updatedAt
+      userSponsoredDriversId
+      driverProfileUserId
+      __typename
+    }
+    purchases {
+      nextToken
+      __typename
+    }
+    adminProfile {
+      id
+      contactEmail
+      createdAt
+      updatedAt
+      adminProfileUserId
+      __typename
+    }
+    adminReports {
+      nextToken
+      __typename
+    }
+    sponsoredDrivers {
+      nextToken
+      __typename
+    }
+    productCatalog {
+      nextToken
+      __typename
+    }
+    pointConversionRate
+    sponsorReports {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    sponsorUsersId
+    userDriverProfileId
+    userAdminProfileId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateUserMutationVariables,
+  APITypes.UpdateUserMutation
+>;
+export const deleteUser = /* GraphQL */ `mutation DeleteUser(
+  $input: DeleteUserInput!
+  $condition: ModelUserConditionInput
+) {
+  deleteUser(input: $input, condition: $condition) {
+    id
+    username
+    email
+    role
+    sponsor {
+      id
+      name
+      pointConversionRate
+      createdAt
+      updatedAt
+      __typename
+    }
+    points
+    pointHistory {
+      nextToken
+      __typename
+    }
+    driverProfile {
+      id
+      contactEmail
+      applicationStatus
+      createdAt
+      updatedAt
+      userSponsoredDriversId
+      driverProfileUserId
+      __typename
+    }
+    purchases {
+      nextToken
+      __typename
+    }
+    adminProfile {
+      id
+      contactEmail
+      createdAt
+      updatedAt
+      adminProfileUserId
+      __typename
+    }
+    adminReports {
+      nextToken
+      __typename
+    }
+    sponsoredDrivers {
+      nextToken
+      __typename
+    }
+    productCatalog {
+      nextToken
+      __typename
+    }
+    pointConversionRate
+    sponsorReports {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    sponsorUsersId
+    userDriverProfileId
+    userAdminProfileId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteUserMutationVariables,
+  APITypes.DeleteUserMutation
 >;
 export const createSponsor = /* GraphQL */ `mutation CreateSponsor(
   $input: CreateSponsorInput!
@@ -151,12 +457,8 @@ export const createSponsor = /* GraphQL */ `mutation CreateSponsor(
       nextToken
       __typename
     }
-    drivers {
-      nextToken
-      __typename
-    }
     pointConversionRate
-    sponsorUsers {
+    users {
       nextToken
       __typename
     }
@@ -184,12 +486,8 @@ export const updateSponsor = /* GraphQL */ `mutation UpdateSponsor(
       nextToken
       __typename
     }
-    drivers {
-      nextToken
-      __typename
-    }
     pointConversionRate
-    sponsorUsers {
+    users {
       nextToken
       __typename
     }
@@ -217,12 +515,8 @@ export const deleteSponsor = /* GraphQL */ `mutation DeleteSponsor(
       nextToken
       __typename
     }
-    drivers {
-      nextToken
-      __typename
-    }
     pointConversionRate
-    sponsorUsers {
+    users {
       nextToken
       __typename
     }
@@ -239,84 +533,6 @@ export const deleteSponsor = /* GraphQL */ `mutation DeleteSponsor(
   APITypes.DeleteSponsorMutationVariables,
   APITypes.DeleteSponsorMutation
 >;
-export const createSponsorUser = /* GraphQL */ `mutation CreateSponsorUser(
-  $input: CreateSponsorUserInput!
-  $condition: ModelSponsorUserConditionInput
-) {
-  createSponsorUser(input: $input, condition: $condition) {
-    id
-    username
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
-      __typename
-    }
-    role
-    createdAt
-    updatedAt
-    sponsorSponsorUsersId
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.CreateSponsorUserMutationVariables,
-  APITypes.CreateSponsorUserMutation
->;
-export const updateSponsorUser = /* GraphQL */ `mutation UpdateSponsorUser(
-  $input: UpdateSponsorUserInput!
-  $condition: ModelSponsorUserConditionInput
-) {
-  updateSponsorUser(input: $input, condition: $condition) {
-    id
-    username
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
-      __typename
-    }
-    role
-    createdAt
-    updatedAt
-    sponsorSponsorUsersId
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.UpdateSponsorUserMutationVariables,
-  APITypes.UpdateSponsorUserMutation
->;
-export const deleteSponsorUser = /* GraphQL */ `mutation DeleteSponsorUser(
-  $input: DeleteSponsorUserInput!
-  $condition: ModelSponsorUserConditionInput
-) {
-  deleteSponsorUser(input: $input, condition: $condition) {
-    id
-    username
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
-      __typename
-    }
-    role
-    createdAt
-    updatedAt
-    sponsorSponsorUsersId
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.DeleteSponsorUserMutationVariables,
-  APITypes.DeleteSponsorUserMutation
->;
 export const createProduct = /* GraphQL */ `mutation CreateProduct(
   $input: CreateProductInput!
   $condition: ModelProductConditionInput
@@ -327,16 +543,13 @@ export const createProduct = /* GraphQL */ `mutation CreateProduct(
     description
     price
     pointsValue
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
+    purchases {
+      nextToken
       __typename
     }
     createdAt
     updatedAt
+    userProductCatalogId
     sponsorProductCatalogId
     __typename
   }
@@ -355,16 +568,13 @@ export const updateProduct = /* GraphQL */ `mutation UpdateProduct(
     description
     price
     pointsValue
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
+    purchases {
+      nextToken
       __typename
     }
     createdAt
     updatedAt
+    userProductCatalogId
     sponsorProductCatalogId
     __typename
   }
@@ -383,16 +593,13 @@ export const deleteProduct = /* GraphQL */ `mutation DeleteProduct(
     description
     price
     pointsValue
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
+    purchases {
+      nextToken
       __typename
     }
     createdAt
     updatedAt
+    userProductCatalogId
     sponsorProductCatalogId
     __typename
   }
@@ -407,21 +614,39 @@ export const createPurchase = /* GraphQL */ `mutation CreatePurchase(
 ) {
   createPurchase(input: $input, condition: $condition) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
+    product {
+      id
+      name
+      description
+      price
+      pointsValue
+      createdAt
+      updatedAt
+      userProductCatalogId
+      sponsorProductCatalogId
+      __typename
+    }
+    productID
     status
     purchaseDate
     createdAt
     updatedAt
-    driverPurchasesId
+    userPurchasesId
+    productPurchasesId
     __typename
   }
 }
@@ -435,21 +660,39 @@ export const updatePurchase = /* GraphQL */ `mutation UpdatePurchase(
 ) {
   updatePurchase(input: $input, condition: $condition) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
+    product {
+      id
+      name
+      description
+      price
+      pointsValue
+      createdAt
+      updatedAt
+      userProductCatalogId
+      sponsorProductCatalogId
+      __typename
+    }
+    productID
     status
     purchaseDate
     createdAt
     updatedAt
-    driverPurchasesId
+    userPurchasesId
+    productPurchasesId
     __typename
   }
 }
@@ -463,21 +706,39 @@ export const deletePurchase = /* GraphQL */ `mutation DeletePurchase(
 ) {
   deletePurchase(input: $input, condition: $condition) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
+    product {
+      id
+      name
+      description
+      price
+      pointsValue
+      createdAt
+      updatedAt
+      userProductCatalogId
+      sponsorProductCatalogId
+      __typename
+    }
+    productID
     status
     purchaseDate
     createdAt
     updatedAt
-    driverPurchasesId
+    userPurchasesId
+    productPurchasesId
     __typename
   }
 }
@@ -491,14 +752,18 @@ export const createPointHistory = /* GraphQL */ `mutation CreatePointHistory(
 ) {
   createPointHistory(input: $input, condition: $condition) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     date
@@ -506,7 +771,7 @@ export const createPointHistory = /* GraphQL */ `mutation CreatePointHistory(
     reason
     createdAt
     updatedAt
-    driverPointHistoryId
+    userPointHistoryId
     __typename
   }
 }
@@ -520,14 +785,18 @@ export const updatePointHistory = /* GraphQL */ `mutation UpdatePointHistory(
 ) {
   updatePointHistory(input: $input, condition: $condition) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     date
@@ -535,7 +804,7 @@ export const updatePointHistory = /* GraphQL */ `mutation UpdatePointHistory(
     reason
     createdAt
     updatedAt
-    driverPointHistoryId
+    userPointHistoryId
     __typename
   }
 }
@@ -549,14 +818,18 @@ export const deletePointHistory = /* GraphQL */ `mutation DeletePointHistory(
 ) {
   deletePointHistory(input: $input, condition: $condition) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     date
@@ -564,7 +837,7 @@ export const deletePointHistory = /* GraphQL */ `mutation DeletePointHistory(
     reason
     createdAt
     updatedAt
-    driverPointHistoryId
+    userPointHistoryId
     __typename
   }
 }
@@ -572,111 +845,30 @@ export const deletePointHistory = /* GraphQL */ `mutation DeletePointHistory(
   APITypes.DeletePointHistoryMutationVariables,
   APITypes.DeletePointHistoryMutation
 >;
-export const createAdministrator = /* GraphQL */ `mutation CreateAdministrator(
-  $input: CreateAdministratorInput!
-  $condition: ModelAdministratorConditionInput
-) {
-  createAdministrator(input: $input, condition: $condition) {
-    id
-    username
-    profile {
-      id
-      contactEmail
-      createdAt
-      updatedAt
-      adminProfileAdministratorId
-      __typename
-    }
-    reports {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    administratorProfileId
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.CreateAdministratorMutationVariables,
-  APITypes.CreateAdministratorMutation
->;
-export const updateAdministrator = /* GraphQL */ `mutation UpdateAdministrator(
-  $input: UpdateAdministratorInput!
-  $condition: ModelAdministratorConditionInput
-) {
-  updateAdministrator(input: $input, condition: $condition) {
-    id
-    username
-    profile {
-      id
-      contactEmail
-      createdAt
-      updatedAt
-      adminProfileAdministratorId
-      __typename
-    }
-    reports {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    administratorProfileId
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.UpdateAdministratorMutationVariables,
-  APITypes.UpdateAdministratorMutation
->;
-export const deleteAdministrator = /* GraphQL */ `mutation DeleteAdministrator(
-  $input: DeleteAdministratorInput!
-  $condition: ModelAdministratorConditionInput
-) {
-  deleteAdministrator(input: $input, condition: $condition) {
-    id
-    username
-    profile {
-      id
-      contactEmail
-      createdAt
-      updatedAt
-      adminProfileAdministratorId
-      __typename
-    }
-    reports {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    administratorProfileId
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.DeleteAdministratorMutationVariables,
-  APITypes.DeleteAdministratorMutation
->;
 export const createAdminProfile = /* GraphQL */ `mutation CreateAdminProfile(
   $input: CreateAdminProfileInput!
   $condition: ModelAdminProfileConditionInput
 ) {
   createAdminProfile(input: $input, condition: $condition) {
     id
-    administrator {
+    user {
       id
       username
+      email
+      role
+      points
+      pointConversionRate
       createdAt
       updatedAt
-      administratorProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     contactEmail
     createdAt
     updatedAt
-    adminProfileAdministratorId
+    adminProfileUserId
     __typename
   }
 }
@@ -690,18 +882,24 @@ export const updateAdminProfile = /* GraphQL */ `mutation UpdateAdminProfile(
 ) {
   updateAdminProfile(input: $input, condition: $condition) {
     id
-    administrator {
+    user {
       id
       username
+      email
+      role
+      points
+      pointConversionRate
       createdAt
       updatedAt
-      administratorProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     contactEmail
     createdAt
     updatedAt
-    adminProfileAdministratorId
+    adminProfileUserId
     __typename
   }
 }
@@ -715,18 +913,24 @@ export const deleteAdminProfile = /* GraphQL */ `mutation DeleteAdminProfile(
 ) {
   deleteAdminProfile(input: $input, condition: $condition) {
     id
-    administrator {
+    user {
       id
       username
+      email
+      role
+      points
+      pointConversionRate
       createdAt
       updatedAt
-      administratorProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     contactEmail
     createdAt
     updatedAt
-    adminProfileAdministratorId
+    adminProfileUserId
     __typename
   }
 }
@@ -740,21 +944,26 @@ export const createDriverProfile = /* GraphQL */ `mutation CreateDriverProfile(
 ) {
   createDriverProfile(input: $input, condition: $condition) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     contactEmail
     applicationStatus
     createdAt
     updatedAt
-    driverProfileDriverId
+    userSponsoredDriversId
+    driverProfileUserId
     __typename
   }
 }
@@ -768,21 +977,26 @@ export const updateDriverProfile = /* GraphQL */ `mutation UpdateDriverProfile(
 ) {
   updateDriverProfile(input: $input, condition: $condition) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     contactEmail
     applicationStatus
     createdAt
     updatedAt
-    driverProfileDriverId
+    userSponsoredDriversId
+    driverProfileUserId
     __typename
   }
 }
@@ -796,21 +1010,26 @@ export const deleteDriverProfile = /* GraphQL */ `mutation DeleteDriverProfile(
 ) {
   deleteDriverProfile(input: $input, condition: $condition) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     contactEmail
     applicationStatus
     createdAt
     updatedAt
-    driverProfileDriverId
+    userSponsoredDriversId
+    driverProfileUserId
     __typename
   }
 }
@@ -828,9 +1047,15 @@ export const createReport = /* GraphQL */ `mutation CreateReport(
     generatedBy {
       id
       username
+      email
+      role
+      points
+      pointConversionRate
       createdAt
       updatedAt
-      administratorProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     sponsor {
@@ -846,8 +1071,9 @@ export const createReport = /* GraphQL */ `mutation CreateReport(
     reportData
     createdAt
     updatedAt
+    userAdminReportsId
+    userSponsorReportsId
     sponsorReportsId
-    administratorReportsId
     __typename
   }
 }
@@ -865,9 +1091,15 @@ export const updateReport = /* GraphQL */ `mutation UpdateReport(
     generatedBy {
       id
       username
+      email
+      role
+      points
+      pointConversionRate
       createdAt
       updatedAt
-      administratorProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     sponsor {
@@ -883,8 +1115,9 @@ export const updateReport = /* GraphQL */ `mutation UpdateReport(
     reportData
     createdAt
     updatedAt
+    userAdminReportsId
+    userSponsorReportsId
     sponsorReportsId
-    administratorReportsId
     __typename
   }
 }
@@ -902,9 +1135,15 @@ export const deleteReport = /* GraphQL */ `mutation DeleteReport(
     generatedBy {
       id
       username
+      email
+      role
+      points
+      pointConversionRate
       createdAt
       updatedAt
-      administratorProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     sponsor {
@@ -920,8 +1159,9 @@ export const deleteReport = /* GraphQL */ `mutation DeleteReport(
     reportData
     createdAt
     updatedAt
+    userAdminReportsId
+    userSponsorReportsId
     sponsorReportsId
-    administratorReportsId
     __typename
   }
 }

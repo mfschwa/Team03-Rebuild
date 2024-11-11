@@ -8,92 +8,204 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateDriver = /* GraphQL */ `subscription OnCreateDriver($filter: ModelSubscriptionDriverFilterInput) {
-  onCreateDriver(filter: $filter) {
+export const onCreateBlog = /* GraphQL */ `subscription OnCreateBlog($filter: ModelSubscriptionBlogFilterInput) {
+  onCreateBlog(filter: $filter) {
     id
     name
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
-      __typename
-    }
-    points
-    pointHistory {
-      nextToken
-      __typename
-    }
-    profile {
-      id
-      contactEmail
-      applicationStatus
-      createdAt
-      updatedAt
-      driverProfileDriverId
-      __typename
-    }
-    purchases {
+    posts {
       nextToken
       __typename
     }
     createdAt
     updatedAt
-    sponsorDriversId
-    driverProfileId
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateDriverSubscriptionVariables,
-  APITypes.OnCreateDriverSubscription
+  APITypes.OnCreateBlogSubscriptionVariables,
+  APITypes.OnCreateBlogSubscription
 >;
-export const onUpdateDriver = /* GraphQL */ `subscription OnUpdateDriver($filter: ModelSubscriptionDriverFilterInput) {
-  onUpdateDriver(filter: $filter) {
+export const onUpdateBlog = /* GraphQL */ `subscription OnUpdateBlog($filter: ModelSubscriptionBlogFilterInput) {
+  onUpdateBlog(filter: $filter) {
     id
     name
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
-      __typename
-    }
-    points
-    pointHistory {
-      nextToken
-      __typename
-    }
-    profile {
-      id
-      contactEmail
-      applicationStatus
-      createdAt
-      updatedAt
-      driverProfileDriverId
-      __typename
-    }
-    purchases {
+    posts {
       nextToken
       __typename
     }
     createdAt
     updatedAt
-    sponsorDriversId
-    driverProfileId
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateDriverSubscriptionVariables,
-  APITypes.OnUpdateDriverSubscription
+  APITypes.OnUpdateBlogSubscriptionVariables,
+  APITypes.OnUpdateBlogSubscription
 >;
-export const onDeleteDriver = /* GraphQL */ `subscription OnDeleteDriver($filter: ModelSubscriptionDriverFilterInput) {
-  onDeleteDriver(filter: $filter) {
+export const onDeleteBlog = /* GraphQL */ `subscription OnDeleteBlog($filter: ModelSubscriptionBlogFilterInput) {
+  onDeleteBlog(filter: $filter) {
     id
     name
+    posts {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteBlogSubscriptionVariables,
+  APITypes.OnDeleteBlogSubscription
+>;
+export const onCreatePost = /* GraphQL */ `subscription OnCreatePost($filter: ModelSubscriptionPostFilterInput) {
+  onCreatePost(filter: $filter) {
+    id
+    title
+    blog {
+      id
+      name
+      createdAt
+      updatedAt
+      __typename
+    }
+    comments {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    blogPostsId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreatePostSubscriptionVariables,
+  APITypes.OnCreatePostSubscription
+>;
+export const onUpdatePost = /* GraphQL */ `subscription OnUpdatePost($filter: ModelSubscriptionPostFilterInput) {
+  onUpdatePost(filter: $filter) {
+    id
+    title
+    blog {
+      id
+      name
+      createdAt
+      updatedAt
+      __typename
+    }
+    comments {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    blogPostsId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdatePostSubscriptionVariables,
+  APITypes.OnUpdatePostSubscription
+>;
+export const onDeletePost = /* GraphQL */ `subscription OnDeletePost($filter: ModelSubscriptionPostFilterInput) {
+  onDeletePost(filter: $filter) {
+    id
+    title
+    blog {
+      id
+      name
+      createdAt
+      updatedAt
+      __typename
+    }
+    comments {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    blogPostsId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeletePostSubscriptionVariables,
+  APITypes.OnDeletePostSubscription
+>;
+export const onCreateComment = /* GraphQL */ `subscription OnCreateComment($filter: ModelSubscriptionCommentFilterInput) {
+  onCreateComment(filter: $filter) {
+    id
+    post {
+      id
+      title
+      createdAt
+      updatedAt
+      blogPostsId
+      __typename
+    }
+    content
+    createdAt
+    updatedAt
+    postCommentsId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateCommentSubscriptionVariables,
+  APITypes.OnCreateCommentSubscription
+>;
+export const onUpdateComment = /* GraphQL */ `subscription OnUpdateComment($filter: ModelSubscriptionCommentFilterInput) {
+  onUpdateComment(filter: $filter) {
+    id
+    post {
+      id
+      title
+      createdAt
+      updatedAt
+      blogPostsId
+      __typename
+    }
+    content
+    createdAt
+    updatedAt
+    postCommentsId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateCommentSubscriptionVariables,
+  APITypes.OnUpdateCommentSubscription
+>;
+export const onDeleteComment = /* GraphQL */ `subscription OnDeleteComment($filter: ModelSubscriptionCommentFilterInput) {
+  onDeleteComment(filter: $filter) {
+    id
+    post {
+      id
+      title
+      createdAt
+      updatedAt
+      blogPostsId
+      __typename
+    }
+    content
+    createdAt
+    updatedAt
+    postCommentsId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteCommentSubscriptionVariables,
+  APITypes.OnDeleteCommentSubscription
+>;
+export const onCreateUser = /* GraphQL */ `subscription OnCreateUser($filter: ModelSubscriptionUserFilterInput) {
+  onCreateUser(filter: $filter) {
+    id
+    username
+    email
+    role
     sponsor {
       id
       name
@@ -107,29 +219,196 @@ export const onDeleteDriver = /* GraphQL */ `subscription OnDeleteDriver($filter
       nextToken
       __typename
     }
-    profile {
+    driverProfile {
       id
       contactEmail
       applicationStatus
       createdAt
       updatedAt
-      driverProfileDriverId
+      userSponsoredDriversId
+      driverProfileUserId
       __typename
     }
     purchases {
       nextToken
       __typename
     }
+    adminProfile {
+      id
+      contactEmail
+      createdAt
+      updatedAt
+      adminProfileUserId
+      __typename
+    }
+    adminReports {
+      nextToken
+      __typename
+    }
+    sponsoredDrivers {
+      nextToken
+      __typename
+    }
+    productCatalog {
+      nextToken
+      __typename
+    }
+    pointConversionRate
+    sponsorReports {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
-    sponsorDriversId
-    driverProfileId
+    sponsorUsersId
+    userDriverProfileId
+    userAdminProfileId
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteDriverSubscriptionVariables,
-  APITypes.OnDeleteDriverSubscription
+  APITypes.OnCreateUserSubscriptionVariables,
+  APITypes.OnCreateUserSubscription
+>;
+export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser($filter: ModelSubscriptionUserFilterInput) {
+  onUpdateUser(filter: $filter) {
+    id
+    username
+    email
+    role
+    sponsor {
+      id
+      name
+      pointConversionRate
+      createdAt
+      updatedAt
+      __typename
+    }
+    points
+    pointHistory {
+      nextToken
+      __typename
+    }
+    driverProfile {
+      id
+      contactEmail
+      applicationStatus
+      createdAt
+      updatedAt
+      userSponsoredDriversId
+      driverProfileUserId
+      __typename
+    }
+    purchases {
+      nextToken
+      __typename
+    }
+    adminProfile {
+      id
+      contactEmail
+      createdAt
+      updatedAt
+      adminProfileUserId
+      __typename
+    }
+    adminReports {
+      nextToken
+      __typename
+    }
+    sponsoredDrivers {
+      nextToken
+      __typename
+    }
+    productCatalog {
+      nextToken
+      __typename
+    }
+    pointConversionRate
+    sponsorReports {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    sponsorUsersId
+    userDriverProfileId
+    userAdminProfileId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateUserSubscriptionVariables,
+  APITypes.OnUpdateUserSubscription
+>;
+export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser($filter: ModelSubscriptionUserFilterInput) {
+  onDeleteUser(filter: $filter) {
+    id
+    username
+    email
+    role
+    sponsor {
+      id
+      name
+      pointConversionRate
+      createdAt
+      updatedAt
+      __typename
+    }
+    points
+    pointHistory {
+      nextToken
+      __typename
+    }
+    driverProfile {
+      id
+      contactEmail
+      applicationStatus
+      createdAt
+      updatedAt
+      userSponsoredDriversId
+      driverProfileUserId
+      __typename
+    }
+    purchases {
+      nextToken
+      __typename
+    }
+    adminProfile {
+      id
+      contactEmail
+      createdAt
+      updatedAt
+      adminProfileUserId
+      __typename
+    }
+    adminReports {
+      nextToken
+      __typename
+    }
+    sponsoredDrivers {
+      nextToken
+      __typename
+    }
+    productCatalog {
+      nextToken
+      __typename
+    }
+    pointConversionRate
+    sponsorReports {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    sponsorUsersId
+    userDriverProfileId
+    userAdminProfileId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteUserSubscriptionVariables,
+  APITypes.OnDeleteUserSubscription
 >;
 export const onCreateSponsor = /* GraphQL */ `subscription OnCreateSponsor($filter: ModelSubscriptionSponsorFilterInput) {
   onCreateSponsor(filter: $filter) {
@@ -139,12 +418,8 @@ export const onCreateSponsor = /* GraphQL */ `subscription OnCreateSponsor($filt
       nextToken
       __typename
     }
-    drivers {
-      nextToken
-      __typename
-    }
     pointConversionRate
-    sponsorUsers {
+    users {
       nextToken
       __typename
     }
@@ -169,12 +444,8 @@ export const onUpdateSponsor = /* GraphQL */ `subscription OnUpdateSponsor($filt
       nextToken
       __typename
     }
-    drivers {
-      nextToken
-      __typename
-    }
     pointConversionRate
-    sponsorUsers {
+    users {
       nextToken
       __typename
     }
@@ -199,12 +470,8 @@ export const onDeleteSponsor = /* GraphQL */ `subscription OnDeleteSponsor($filt
       nextToken
       __typename
     }
-    drivers {
-      nextToken
-      __typename
-    }
     pointConversionRate
-    sponsorUsers {
+    users {
       nextToken
       __typename
     }
@@ -221,81 +488,6 @@ export const onDeleteSponsor = /* GraphQL */ `subscription OnDeleteSponsor($filt
   APITypes.OnDeleteSponsorSubscriptionVariables,
   APITypes.OnDeleteSponsorSubscription
 >;
-export const onCreateSponsorUser = /* GraphQL */ `subscription OnCreateSponsorUser(
-  $filter: ModelSubscriptionSponsorUserFilterInput
-) {
-  onCreateSponsorUser(filter: $filter) {
-    id
-    username
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
-      __typename
-    }
-    role
-    createdAt
-    updatedAt
-    sponsorSponsorUsersId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateSponsorUserSubscriptionVariables,
-  APITypes.OnCreateSponsorUserSubscription
->;
-export const onUpdateSponsorUser = /* GraphQL */ `subscription OnUpdateSponsorUser(
-  $filter: ModelSubscriptionSponsorUserFilterInput
-) {
-  onUpdateSponsorUser(filter: $filter) {
-    id
-    username
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
-      __typename
-    }
-    role
-    createdAt
-    updatedAt
-    sponsorSponsorUsersId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdateSponsorUserSubscriptionVariables,
-  APITypes.OnUpdateSponsorUserSubscription
->;
-export const onDeleteSponsorUser = /* GraphQL */ `subscription OnDeleteSponsorUser(
-  $filter: ModelSubscriptionSponsorUserFilterInput
-) {
-  onDeleteSponsorUser(filter: $filter) {
-    id
-    username
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
-      __typename
-    }
-    role
-    createdAt
-    updatedAt
-    sponsorSponsorUsersId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeleteSponsorUserSubscriptionVariables,
-  APITypes.OnDeleteSponsorUserSubscription
->;
 export const onCreateProduct = /* GraphQL */ `subscription OnCreateProduct($filter: ModelSubscriptionProductFilterInput) {
   onCreateProduct(filter: $filter) {
     id
@@ -303,16 +495,13 @@ export const onCreateProduct = /* GraphQL */ `subscription OnCreateProduct($filt
     description
     price
     pointsValue
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
+    purchases {
+      nextToken
       __typename
     }
     createdAt
     updatedAt
+    userProductCatalogId
     sponsorProductCatalogId
     __typename
   }
@@ -328,16 +517,13 @@ export const onUpdateProduct = /* GraphQL */ `subscription OnUpdateProduct($filt
     description
     price
     pointsValue
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
+    purchases {
+      nextToken
       __typename
     }
     createdAt
     updatedAt
+    userProductCatalogId
     sponsorProductCatalogId
     __typename
   }
@@ -353,16 +539,13 @@ export const onDeleteProduct = /* GraphQL */ `subscription OnDeleteProduct($filt
     description
     price
     pointsValue
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
+    purchases {
+      nextToken
       __typename
     }
     createdAt
     updatedAt
+    userProductCatalogId
     sponsorProductCatalogId
     __typename
   }
@@ -374,21 +557,39 @@ export const onDeleteProduct = /* GraphQL */ `subscription OnDeleteProduct($filt
 export const onCreatePurchase = /* GraphQL */ `subscription OnCreatePurchase($filter: ModelSubscriptionPurchaseFilterInput) {
   onCreatePurchase(filter: $filter) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
+    product {
+      id
+      name
+      description
+      price
+      pointsValue
+      createdAt
+      updatedAt
+      userProductCatalogId
+      sponsorProductCatalogId
+      __typename
+    }
+    productID
     status
     purchaseDate
     createdAt
     updatedAt
-    driverPurchasesId
+    userPurchasesId
+    productPurchasesId
     __typename
   }
 }
@@ -399,21 +600,39 @@ export const onCreatePurchase = /* GraphQL */ `subscription OnCreatePurchase($fi
 export const onUpdatePurchase = /* GraphQL */ `subscription OnUpdatePurchase($filter: ModelSubscriptionPurchaseFilterInput) {
   onUpdatePurchase(filter: $filter) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
+    product {
+      id
+      name
+      description
+      price
+      pointsValue
+      createdAt
+      updatedAt
+      userProductCatalogId
+      sponsorProductCatalogId
+      __typename
+    }
+    productID
     status
     purchaseDate
     createdAt
     updatedAt
-    driverPurchasesId
+    userPurchasesId
+    productPurchasesId
     __typename
   }
 }
@@ -424,21 +643,39 @@ export const onUpdatePurchase = /* GraphQL */ `subscription OnUpdatePurchase($fi
 export const onDeletePurchase = /* GraphQL */ `subscription OnDeletePurchase($filter: ModelSubscriptionPurchaseFilterInput) {
   onDeletePurchase(filter: $filter) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
+    product {
+      id
+      name
+      description
+      price
+      pointsValue
+      createdAt
+      updatedAt
+      userProductCatalogId
+      sponsorProductCatalogId
+      __typename
+    }
+    productID
     status
     purchaseDate
     createdAt
     updatedAt
-    driverPurchasesId
+    userPurchasesId
+    productPurchasesId
     __typename
   }
 }
@@ -451,14 +688,18 @@ export const onCreatePointHistory = /* GraphQL */ `subscription OnCreatePointHis
 ) {
   onCreatePointHistory(filter: $filter) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     date
@@ -466,7 +707,7 @@ export const onCreatePointHistory = /* GraphQL */ `subscription OnCreatePointHis
     reason
     createdAt
     updatedAt
-    driverPointHistoryId
+    userPointHistoryId
     __typename
   }
 }
@@ -479,14 +720,18 @@ export const onUpdatePointHistory = /* GraphQL */ `subscription OnUpdatePointHis
 ) {
   onUpdatePointHistory(filter: $filter) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     date
@@ -494,7 +739,7 @@ export const onUpdatePointHistory = /* GraphQL */ `subscription OnUpdatePointHis
     reason
     createdAt
     updatedAt
-    driverPointHistoryId
+    userPointHistoryId
     __typename
   }
 }
@@ -507,14 +752,18 @@ export const onDeletePointHistory = /* GraphQL */ `subscription OnDeletePointHis
 ) {
   onDeletePointHistory(filter: $filter) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     date
@@ -522,7 +771,7 @@ export const onDeletePointHistory = /* GraphQL */ `subscription OnDeletePointHis
     reason
     createdAt
     updatedAt
-    driverPointHistoryId
+    userPointHistoryId
     __typename
   }
 }
@@ -530,107 +779,29 @@ export const onDeletePointHistory = /* GraphQL */ `subscription OnDeletePointHis
   APITypes.OnDeletePointHistorySubscriptionVariables,
   APITypes.OnDeletePointHistorySubscription
 >;
-export const onCreateAdministrator = /* GraphQL */ `subscription OnCreateAdministrator(
-  $filter: ModelSubscriptionAdministratorFilterInput
-) {
-  onCreateAdministrator(filter: $filter) {
-    id
-    username
-    profile {
-      id
-      contactEmail
-      createdAt
-      updatedAt
-      adminProfileAdministratorId
-      __typename
-    }
-    reports {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    administratorProfileId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateAdministratorSubscriptionVariables,
-  APITypes.OnCreateAdministratorSubscription
->;
-export const onUpdateAdministrator = /* GraphQL */ `subscription OnUpdateAdministrator(
-  $filter: ModelSubscriptionAdministratorFilterInput
-) {
-  onUpdateAdministrator(filter: $filter) {
-    id
-    username
-    profile {
-      id
-      contactEmail
-      createdAt
-      updatedAt
-      adminProfileAdministratorId
-      __typename
-    }
-    reports {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    administratorProfileId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdateAdministratorSubscriptionVariables,
-  APITypes.OnUpdateAdministratorSubscription
->;
-export const onDeleteAdministrator = /* GraphQL */ `subscription OnDeleteAdministrator(
-  $filter: ModelSubscriptionAdministratorFilterInput
-) {
-  onDeleteAdministrator(filter: $filter) {
-    id
-    username
-    profile {
-      id
-      contactEmail
-      createdAt
-      updatedAt
-      adminProfileAdministratorId
-      __typename
-    }
-    reports {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    administratorProfileId
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeleteAdministratorSubscriptionVariables,
-  APITypes.OnDeleteAdministratorSubscription
->;
 export const onCreateAdminProfile = /* GraphQL */ `subscription OnCreateAdminProfile(
   $filter: ModelSubscriptionAdminProfileFilterInput
 ) {
   onCreateAdminProfile(filter: $filter) {
     id
-    administrator {
+    user {
       id
       username
+      email
+      role
+      points
+      pointConversionRate
       createdAt
       updatedAt
-      administratorProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     contactEmail
     createdAt
     updatedAt
-    adminProfileAdministratorId
+    adminProfileUserId
     __typename
   }
 }
@@ -643,18 +814,24 @@ export const onUpdateAdminProfile = /* GraphQL */ `subscription OnUpdateAdminPro
 ) {
   onUpdateAdminProfile(filter: $filter) {
     id
-    administrator {
+    user {
       id
       username
+      email
+      role
+      points
+      pointConversionRate
       createdAt
       updatedAt
-      administratorProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     contactEmail
     createdAt
     updatedAt
-    adminProfileAdministratorId
+    adminProfileUserId
     __typename
   }
 }
@@ -667,18 +844,24 @@ export const onDeleteAdminProfile = /* GraphQL */ `subscription OnDeleteAdminPro
 ) {
   onDeleteAdminProfile(filter: $filter) {
     id
-    administrator {
+    user {
       id
       username
+      email
+      role
+      points
+      pointConversionRate
       createdAt
       updatedAt
-      administratorProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     contactEmail
     createdAt
     updatedAt
-    adminProfileAdministratorId
+    adminProfileUserId
     __typename
   }
 }
@@ -691,21 +874,26 @@ export const onCreateDriverProfile = /* GraphQL */ `subscription OnCreateDriverP
 ) {
   onCreateDriverProfile(filter: $filter) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     contactEmail
     applicationStatus
     createdAt
     updatedAt
-    driverProfileDriverId
+    userSponsoredDriversId
+    driverProfileUserId
     __typename
   }
 }
@@ -718,21 +906,26 @@ export const onUpdateDriverProfile = /* GraphQL */ `subscription OnUpdateDriverP
 ) {
   onUpdateDriverProfile(filter: $filter) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     contactEmail
     applicationStatus
     createdAt
     updatedAt
-    driverProfileDriverId
+    userSponsoredDriversId
+    driverProfileUserId
     __typename
   }
 }
@@ -745,21 +938,26 @@ export const onDeleteDriverProfile = /* GraphQL */ `subscription OnDeleteDriverP
 ) {
   onDeleteDriverProfile(filter: $filter) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     contactEmail
     applicationStatus
     createdAt
     updatedAt
-    driverProfileDriverId
+    userSponsoredDriversId
+    driverProfileUserId
     __typename
   }
 }
@@ -774,9 +972,15 @@ export const onCreateReport = /* GraphQL */ `subscription OnCreateReport($filter
     generatedBy {
       id
       username
+      email
+      role
+      points
+      pointConversionRate
       createdAt
       updatedAt
-      administratorProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     sponsor {
@@ -792,8 +996,9 @@ export const onCreateReport = /* GraphQL */ `subscription OnCreateReport($filter
     reportData
     createdAt
     updatedAt
+    userAdminReportsId
+    userSponsorReportsId
     sponsorReportsId
-    administratorReportsId
     __typename
   }
 }
@@ -808,9 +1013,15 @@ export const onUpdateReport = /* GraphQL */ `subscription OnUpdateReport($filter
     generatedBy {
       id
       username
+      email
+      role
+      points
+      pointConversionRate
       createdAt
       updatedAt
-      administratorProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     sponsor {
@@ -826,8 +1037,9 @@ export const onUpdateReport = /* GraphQL */ `subscription OnUpdateReport($filter
     reportData
     createdAt
     updatedAt
+    userAdminReportsId
+    userSponsorReportsId
     sponsorReportsId
-    administratorReportsId
     __typename
   }
 }
@@ -842,9 +1054,15 @@ export const onDeleteReport = /* GraphQL */ `subscription OnDeleteReport($filter
     generatedBy {
       id
       username
+      email
+      role
+      points
+      pointConversionRate
       createdAt
       updatedAt
-      administratorProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     sponsor {
@@ -860,8 +1078,9 @@ export const onDeleteReport = /* GraphQL */ `subscription OnDeleteReport($filter
     reportData
     createdAt
     updatedAt
+    userAdminReportsId
+    userSponsorReportsId
     sponsorReportsId
-    administratorReportsId
     __typename
   }
 }

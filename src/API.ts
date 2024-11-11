@@ -2,24 +2,18 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateDriverInput = {
+export type CreateBlogInput = {
   id?: string | null,
   name: string,
-  points: number,
-  sponsorDriversId?: string | null,
-  driverProfileId?: string | null,
 };
 
-export type ModelDriverConditionInput = {
+export type ModelBlogConditionInput = {
   name?: ModelStringInput | null,
-  points?: ModelIntInput | null,
-  and?: Array< ModelDriverConditionInput | null > | null,
-  or?: Array< ModelDriverConditionInput | null > | null,
-  not?: ModelDriverConditionInput | null,
+  and?: Array< ModelBlogConditionInput | null > | null,
+  or?: Array< ModelBlogConditionInput | null > | null,
+  not?: ModelBlogConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  sponsorDriversId?: ModelIDInput | null,
-  driverProfileId?: ModelIDInput | null,
 };
 
 export type ModelStringInput = {
@@ -62,16 +56,71 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
+export type Blog = {
+  __typename: "Blog",
+  id: string,
+  name: string,
+  posts?: ModelPostConnection | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ModelPostConnection = {
+  __typename: "ModelPostConnection",
+  items:  Array<Post | null >,
+  nextToken?: string | null,
+};
+
+export type Post = {
+  __typename: "Post",
+  id: string,
+  title: string,
+  blog?: Blog | null,
+  comments?: ModelCommentConnection | null,
+  createdAt: string,
+  updatedAt: string,
+  blogPostsId?: string | null,
+};
+
+export type ModelCommentConnection = {
+  __typename: "ModelCommentConnection",
+  items:  Array<Comment | null >,
+  nextToken?: string | null,
+};
+
+export type Comment = {
+  __typename: "Comment",
+  id: string,
+  post?: Post | null,
+  content: string,
+  createdAt: string,
+  updatedAt: string,
+  postCommentsId?: string | null,
+};
+
+export type UpdateBlogInput = {
+  id: string,
+  name?: string | null,
+};
+
+export type DeleteBlogInput = {
+  id: string,
+};
+
+export type CreatePostInput = {
+  id?: string | null,
+  title: string,
+  blogPostsId?: string | null,
+};
+
+export type ModelPostConditionInput = {
+  title?: ModelStringInput | null,
+  and?: Array< ModelPostConditionInput | null > | null,
+  or?: Array< ModelPostConditionInput | null > | null,
+  not?: ModelPostConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  blogPostsId?: ModelIDInput | null,
 };
 
 export type ModelIDInput = {
@@ -90,19 +139,128 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type Driver = {
-  __typename: "Driver",
+export type UpdatePostInput = {
   id: string,
-  name: string,
+  title?: string | null,
+  blogPostsId?: string | null,
+};
+
+export type DeletePostInput = {
+  id: string,
+};
+
+export type CreateCommentInput = {
+  id?: string | null,
+  content: string,
+  postCommentsId?: string | null,
+};
+
+export type ModelCommentConditionInput = {
+  content?: ModelStringInput | null,
+  and?: Array< ModelCommentConditionInput | null > | null,
+  or?: Array< ModelCommentConditionInput | null > | null,
+  not?: ModelCommentConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  postCommentsId?: ModelIDInput | null,
+};
+
+export type UpdateCommentInput = {
+  id: string,
+  content?: string | null,
+  postCommentsId?: string | null,
+};
+
+export type DeleteCommentInput = {
+  id: string,
+};
+
+export type CreateUserInput = {
+  id?: string | null,
+  username: string,
+  email: string,
+  role: UserRole,
+  points?: number | null,
+  pointConversionRate?: number | null,
+  sponsorUsersId?: string | null,
+  userDriverProfileId?: string | null,
+  userAdminProfileId?: string | null,
+};
+
+export enum UserRole {
+  ADMIN = "ADMIN",
+  DRIVER = "DRIVER",
+  SPONSOR = "SPONSOR",
+}
+
+
+export type ModelUserConditionInput = {
+  username?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  role?: ModelUserRoleInput | null,
+  points?: ModelIntInput | null,
+  pointConversionRate?: ModelFloatInput | null,
+  and?: Array< ModelUserConditionInput | null > | null,
+  or?: Array< ModelUserConditionInput | null > | null,
+  not?: ModelUserConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  sponsorUsersId?: ModelIDInput | null,
+  userDriverProfileId?: ModelIDInput | null,
+  userAdminProfileId?: ModelIDInput | null,
+};
+
+export type ModelUserRoleInput = {
+  eq?: UserRole | null,
+  ne?: UserRole | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type ModelFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type User = {
+  __typename: "User",
+  id: string,
+  username: string,
+  email: string,
+  role: UserRole,
   sponsor?: Sponsor | null,
-  points: number,
+  points?: number | null,
   pointHistory?: ModelPointHistoryConnection | null,
-  profile?: DriverProfile | null,
+  driverProfile?: DriverProfile | null,
   purchases?: ModelPurchaseConnection | null,
+  adminProfile?: AdminProfile | null,
+  adminReports?: ModelReportConnection | null,
+  sponsoredDrivers?: ModelDriverProfileConnection | null,
+  productCatalog?: ModelProductConnection | null,
+  pointConversionRate?: number | null,
+  sponsorReports?: ModelReportConnection | null,
   createdAt: string,
   updatedAt: string,
-  sponsorDriversId?: string | null,
-  driverProfileId?: string | null,
+  sponsorUsersId?: string | null,
+  userDriverProfileId?: string | null,
+  userAdminProfileId?: string | null,
 };
 
 export type Sponsor = {
@@ -110,9 +268,8 @@ export type Sponsor = {
   id: string,
   name: string,
   productCatalog?: ModelProductConnection | null,
-  drivers?: ModelDriverConnection | null,
   pointConversionRate: number,
-  sponsorUsers?: ModelSponsorUserConnection | null,
+  users?: ModelUserConnection | null,
   reports?: ModelReportConnection | null,
   createdAt: string,
   updatedAt: string,
@@ -131,33 +288,37 @@ export type Product = {
   description: string,
   price: number,
   pointsValue: number,
-  sponsor?: Sponsor | null,
+  purchases?: ModelPurchaseConnection | null,
   createdAt: string,
   updatedAt: string,
+  userProductCatalogId?: string | null,
   sponsorProductCatalogId?: string | null,
 };
 
-export type ModelDriverConnection = {
-  __typename: "ModelDriverConnection",
-  items:  Array<Driver | null >,
+export type ModelPurchaseConnection = {
+  __typename: "ModelPurchaseConnection",
+  items:  Array<Purchase | null >,
   nextToken?: string | null,
 };
 
-export type ModelSponsorUserConnection = {
-  __typename: "ModelSponsorUserConnection",
-  items:  Array<SponsorUser | null >,
-  nextToken?: string | null,
-};
-
-export type SponsorUser = {
-  __typename: "SponsorUser",
+export type Purchase = {
+  __typename: "Purchase",
   id: string,
-  username: string,
-  sponsor?: Sponsor | null,
-  role: string,
+  user?: User | null,
+  product?: Product | null,
+  productID: string,
+  status: string,
+  purchaseDate: string,
   createdAt: string,
   updatedAt: string,
-  sponsorSponsorUsersId?: string | null,
+  userPurchasesId?: string | null,
+  productPurchasesId?: string | null,
+};
+
+export type ModelUserConnection = {
+  __typename: "ModelUserConnection",
+  items:  Array<User | null >,
+  nextToken?: string | null,
 };
 
 export type ModelReportConnection = {
@@ -170,36 +331,16 @@ export type Report = {
   __typename: "Report",
   id: string,
   type: string,
-  generatedBy?: Administrator | null,
+  generatedBy?: User | null,
   sponsor?: Sponsor | null,
   dateRangeStart?: string | null,
   dateRangeEnd?: string | null,
   reportData: string,
   createdAt: string,
   updatedAt: string,
+  userAdminReportsId?: string | null,
+  userSponsorReportsId?: string | null,
   sponsorReportsId?: string | null,
-  administratorReportsId?: string | null,
-};
-
-export type Administrator = {
-  __typename: "Administrator",
-  id: string,
-  username: string,
-  profile?: AdminProfile | null,
-  reports?: ModelReportConnection | null,
-  createdAt: string,
-  updatedAt: string,
-  administratorProfileId?: string | null,
-};
-
-export type AdminProfile = {
-  __typename: "AdminProfile",
-  id: string,
-  administrator?: Administrator | null,
-  contactEmail: string,
-  createdAt: string,
-  updatedAt: string,
-  adminProfileAdministratorId?: string | null,
 };
 
 export type ModelPointHistoryConnection = {
@@ -211,52 +352,56 @@ export type ModelPointHistoryConnection = {
 export type PointHistory = {
   __typename: "PointHistory",
   id: string,
-  driver?: Driver | null,
+  user?: User | null,
   date: string,
   pointsChange: number,
   reason: string,
   createdAt: string,
   updatedAt: string,
-  driverPointHistoryId?: string | null,
+  userPointHistoryId?: string | null,
 };
 
 export type DriverProfile = {
   __typename: "DriverProfile",
   id: string,
-  driver?: Driver | null,
+  user?: User | null,
   contactEmail: string,
   applicationStatus: string,
   createdAt: string,
   updatedAt: string,
-  driverProfileDriverId?: string | null,
+  userSponsoredDriversId?: string | null,
+  driverProfileUserId?: string | null,
 };
 
-export type ModelPurchaseConnection = {
-  __typename: "ModelPurchaseConnection",
-  items:  Array<Purchase | null >,
+export type AdminProfile = {
+  __typename: "AdminProfile",
+  id: string,
+  user?: User | null,
+  contactEmail: string,
+  createdAt: string,
+  updatedAt: string,
+  adminProfileUserId?: string | null,
+};
+
+export type ModelDriverProfileConnection = {
+  __typename: "ModelDriverProfileConnection",
+  items:  Array<DriverProfile | null >,
   nextToken?: string | null,
 };
 
-export type Purchase = {
-  __typename: "Purchase",
+export type UpdateUserInput = {
   id: string,
-  driver?: Driver | null,
-  status: string,
-  purchaseDate: string,
-  createdAt: string,
-  updatedAt: string,
-  driverPurchasesId?: string | null,
-};
-
-export type UpdateDriverInput = {
-  id: string,
-  name?: string | null,
+  username?: string | null,
+  email?: string | null,
+  role?: UserRole | null,
   points?: number | null,
-  sponsorDriversId?: string | null,
-  driverProfileId?: string | null,
+  pointConversionRate?: number | null,
+  sponsorUsersId?: string | null,
+  userDriverProfileId?: string | null,
+  userAdminProfileId?: string | null,
 };
 
-export type DeleteDriverInput = {
+export type DeleteUserInput = {
   id: string,
 };
 
@@ -276,18 +421,6 @@ export type ModelSponsorConditionInput = {
   updatedAt?: ModelStringInput | null,
 };
 
-export type ModelFloatInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
 export type UpdateSponsorInput = {
   id: string,
   name?: string | null,
@@ -298,41 +431,13 @@ export type DeleteSponsorInput = {
   id: string,
 };
 
-export type CreateSponsorUserInput = {
-  id?: string | null,
-  username: string,
-  role: string,
-  sponsorSponsorUsersId?: string | null,
-};
-
-export type ModelSponsorUserConditionInput = {
-  username?: ModelStringInput | null,
-  role?: ModelStringInput | null,
-  and?: Array< ModelSponsorUserConditionInput | null > | null,
-  or?: Array< ModelSponsorUserConditionInput | null > | null,
-  not?: ModelSponsorUserConditionInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-  sponsorSponsorUsersId?: ModelIDInput | null,
-};
-
-export type UpdateSponsorUserInput = {
-  id: string,
-  username?: string | null,
-  role?: string | null,
-  sponsorSponsorUsersId?: string | null,
-};
-
-export type DeleteSponsorUserInput = {
-  id: string,
-};
-
 export type CreateProductInput = {
   id?: string | null,
   name: string,
   description: string,
   price: number,
   pointsValue: number,
+  userProductCatalogId?: string | null,
   sponsorProductCatalogId?: string | null,
 };
 
@@ -346,6 +451,7 @@ export type ModelProductConditionInput = {
   not?: ModelProductConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
+  userProductCatalogId?: ModelIDInput | null,
   sponsorProductCatalogId?: ModelIDInput | null,
 };
 
@@ -355,6 +461,7 @@ export type UpdateProductInput = {
   description?: string | null,
   price?: number | null,
   pointsValue?: number | null,
+  userProductCatalogId?: string | null,
   sponsorProductCatalogId?: string | null,
 };
 
@@ -364,12 +471,15 @@ export type DeleteProductInput = {
 
 export type CreatePurchaseInput = {
   id?: string | null,
+  productID: string,
   status: string,
   purchaseDate: string,
-  driverPurchasesId?: string | null,
+  userPurchasesId?: string | null,
+  productPurchasesId?: string | null,
 };
 
 export type ModelPurchaseConditionInput = {
+  productID?: ModelIDInput | null,
   status?: ModelStringInput | null,
   purchaseDate?: ModelStringInput | null,
   and?: Array< ModelPurchaseConditionInput | null > | null,
@@ -377,14 +487,17 @@ export type ModelPurchaseConditionInput = {
   not?: ModelPurchaseConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  driverPurchasesId?: ModelIDInput | null,
+  userPurchasesId?: ModelIDInput | null,
+  productPurchasesId?: ModelIDInput | null,
 };
 
 export type UpdatePurchaseInput = {
   id: string,
+  productID?: string | null,
   status?: string | null,
   purchaseDate?: string | null,
-  driverPurchasesId?: string | null,
+  userPurchasesId?: string | null,
+  productPurchasesId?: string | null,
 };
 
 export type DeletePurchaseInput = {
@@ -396,7 +509,7 @@ export type CreatePointHistoryInput = {
   date: string,
   pointsChange: number,
   reason: string,
-  driverPointHistoryId?: string | null,
+  userPointHistoryId?: string | null,
 };
 
 export type ModelPointHistoryConditionInput = {
@@ -408,7 +521,7 @@ export type ModelPointHistoryConditionInput = {
   not?: ModelPointHistoryConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  driverPointHistoryId?: ModelIDInput | null,
+  userPointHistoryId?: ModelIDInput | null,
 };
 
 export type UpdatePointHistoryInput = {
@@ -416,43 +529,17 @@ export type UpdatePointHistoryInput = {
   date?: string | null,
   pointsChange?: number | null,
   reason?: string | null,
-  driverPointHistoryId?: string | null,
+  userPointHistoryId?: string | null,
 };
 
 export type DeletePointHistoryInput = {
   id: string,
 };
 
-export type CreateAdministratorInput = {
-  id?: string | null,
-  username: string,
-  administratorProfileId?: string | null,
-};
-
-export type ModelAdministratorConditionInput = {
-  username?: ModelStringInput | null,
-  and?: Array< ModelAdministratorConditionInput | null > | null,
-  or?: Array< ModelAdministratorConditionInput | null > | null,
-  not?: ModelAdministratorConditionInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-  administratorProfileId?: ModelIDInput | null,
-};
-
-export type UpdateAdministratorInput = {
-  id: string,
-  username?: string | null,
-  administratorProfileId?: string | null,
-};
-
-export type DeleteAdministratorInput = {
-  id: string,
-};
-
 export type CreateAdminProfileInput = {
   id?: string | null,
   contactEmail: string,
-  adminProfileAdministratorId?: string | null,
+  adminProfileUserId?: string | null,
 };
 
 export type ModelAdminProfileConditionInput = {
@@ -462,13 +549,13 @@ export type ModelAdminProfileConditionInput = {
   not?: ModelAdminProfileConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  adminProfileAdministratorId?: ModelIDInput | null,
+  adminProfileUserId?: ModelIDInput | null,
 };
 
 export type UpdateAdminProfileInput = {
   id: string,
   contactEmail?: string | null,
-  adminProfileAdministratorId?: string | null,
+  adminProfileUserId?: string | null,
 };
 
 export type DeleteAdminProfileInput = {
@@ -479,7 +566,8 @@ export type CreateDriverProfileInput = {
   id?: string | null,
   contactEmail: string,
   applicationStatus: string,
-  driverProfileDriverId?: string | null,
+  userSponsoredDriversId?: string | null,
+  driverProfileUserId?: string | null,
 };
 
 export type ModelDriverProfileConditionInput = {
@@ -490,14 +578,16 @@ export type ModelDriverProfileConditionInput = {
   not?: ModelDriverProfileConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  driverProfileDriverId?: ModelIDInput | null,
+  userSponsoredDriversId?: ModelIDInput | null,
+  driverProfileUserId?: ModelIDInput | null,
 };
 
 export type UpdateDriverProfileInput = {
   id: string,
   contactEmail?: string | null,
   applicationStatus?: string | null,
-  driverProfileDriverId?: string | null,
+  userSponsoredDriversId?: string | null,
+  driverProfileUserId?: string | null,
 };
 
 export type DeleteDriverProfileInput = {
@@ -510,8 +600,9 @@ export type CreateReportInput = {
   dateRangeStart?: string | null,
   dateRangeEnd?: string | null,
   reportData: string,
+  userAdminReportsId?: string | null,
+  userSponsorReportsId?: string | null,
   sponsorReportsId?: string | null,
-  administratorReportsId?: string | null,
 };
 
 export type ModelReportConditionInput = {
@@ -524,8 +615,9 @@ export type ModelReportConditionInput = {
   not?: ModelReportConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
+  userAdminReportsId?: ModelIDInput | null,
+  userSponsorReportsId?: ModelIDInput | null,
   sponsorReportsId?: ModelIDInput | null,
-  administratorReportsId?: ModelIDInput | null,
 };
 
 export type UpdateReportInput = {
@@ -534,8 +626,9 @@ export type UpdateReportInput = {
   dateRangeStart?: string | null,
   dateRangeEnd?: string | null,
   reportData?: string | null,
+  userAdminReportsId?: string | null,
+  userSponsorReportsId?: string | null,
   sponsorReportsId?: string | null,
-  administratorReportsId?: string | null,
 };
 
 export type DeleteReportInput = {
@@ -585,17 +678,59 @@ export type DeleteAuditLogInput = {
   id: string,
 };
 
-export type ModelDriverFilterInput = {
+export type ModelBlogFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
-  points?: ModelIntInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  and?: Array< ModelDriverFilterInput | null > | null,
-  or?: Array< ModelDriverFilterInput | null > | null,
-  not?: ModelDriverFilterInput | null,
-  sponsorDriversId?: ModelIDInput | null,
-  driverProfileId?: ModelIDInput | null,
+  and?: Array< ModelBlogFilterInput | null > | null,
+  or?: Array< ModelBlogFilterInput | null > | null,
+  not?: ModelBlogFilterInput | null,
+};
+
+export type ModelBlogConnection = {
+  __typename: "ModelBlogConnection",
+  items:  Array<Blog | null >,
+  nextToken?: string | null,
+};
+
+export type ModelPostFilterInput = {
+  id?: ModelIDInput | null,
+  title?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelPostFilterInput | null > | null,
+  or?: Array< ModelPostFilterInput | null > | null,
+  not?: ModelPostFilterInput | null,
+  blogPostsId?: ModelIDInput | null,
+};
+
+export type ModelCommentFilterInput = {
+  id?: ModelIDInput | null,
+  content?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelCommentFilterInput | null > | null,
+  or?: Array< ModelCommentFilterInput | null > | null,
+  not?: ModelCommentFilterInput | null,
+  postCommentsId?: ModelIDInput | null,
+};
+
+export type ModelUserFilterInput = {
+  id?: ModelIDInput | null,
+  username?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  role?: ModelUserRoleInput | null,
+  points?: ModelIntInput | null,
+  pointConversionRate?: ModelFloatInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelUserFilterInput | null > | null,
+  or?: Array< ModelUserFilterInput | null > | null,
+  not?: ModelUserFilterInput | null,
+  sponsorUsersId?: ModelIDInput | null,
+  userDriverProfileId?: ModelIDInput | null,
+  userAdminProfileId?: ModelIDInput | null,
 };
 
 export type ModelSponsorFilterInput = {
@@ -615,18 +750,6 @@ export type ModelSponsorConnection = {
   nextToken?: string | null,
 };
 
-export type ModelSponsorUserFilterInput = {
-  id?: ModelIDInput | null,
-  username?: ModelStringInput | null,
-  role?: ModelStringInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-  and?: Array< ModelSponsorUserFilterInput | null > | null,
-  or?: Array< ModelSponsorUserFilterInput | null > | null,
-  not?: ModelSponsorUserFilterInput | null,
-  sponsorSponsorUsersId?: ModelIDInput | null,
-};
-
 export type ModelProductFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
@@ -638,11 +761,13 @@ export type ModelProductFilterInput = {
   and?: Array< ModelProductFilterInput | null > | null,
   or?: Array< ModelProductFilterInput | null > | null,
   not?: ModelProductFilterInput | null,
+  userProductCatalogId?: ModelIDInput | null,
   sponsorProductCatalogId?: ModelIDInput | null,
 };
 
 export type ModelPurchaseFilterInput = {
   id?: ModelIDInput | null,
+  productID?: ModelIDInput | null,
   status?: ModelStringInput | null,
   purchaseDate?: ModelStringInput | null,
   createdAt?: ModelStringInput | null,
@@ -650,7 +775,8 @@ export type ModelPurchaseFilterInput = {
   and?: Array< ModelPurchaseFilterInput | null > | null,
   or?: Array< ModelPurchaseFilterInput | null > | null,
   not?: ModelPurchaseFilterInput | null,
-  driverPurchasesId?: ModelIDInput | null,
+  userPurchasesId?: ModelIDInput | null,
+  productPurchasesId?: ModelIDInput | null,
 };
 
 export type ModelPointHistoryFilterInput = {
@@ -663,24 +789,7 @@ export type ModelPointHistoryFilterInput = {
   and?: Array< ModelPointHistoryFilterInput | null > | null,
   or?: Array< ModelPointHistoryFilterInput | null > | null,
   not?: ModelPointHistoryFilterInput | null,
-  driverPointHistoryId?: ModelIDInput | null,
-};
-
-export type ModelAdministratorFilterInput = {
-  id?: ModelIDInput | null,
-  username?: ModelStringInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-  and?: Array< ModelAdministratorFilterInput | null > | null,
-  or?: Array< ModelAdministratorFilterInput | null > | null,
-  not?: ModelAdministratorFilterInput | null,
-  administratorProfileId?: ModelIDInput | null,
-};
-
-export type ModelAdministratorConnection = {
-  __typename: "ModelAdministratorConnection",
-  items:  Array<Administrator | null >,
-  nextToken?: string | null,
+  userPointHistoryId?: ModelIDInput | null,
 };
 
 export type ModelAdminProfileFilterInput = {
@@ -691,7 +800,7 @@ export type ModelAdminProfileFilterInput = {
   and?: Array< ModelAdminProfileFilterInput | null > | null,
   or?: Array< ModelAdminProfileFilterInput | null > | null,
   not?: ModelAdminProfileFilterInput | null,
-  adminProfileAdministratorId?: ModelIDInput | null,
+  adminProfileUserId?: ModelIDInput | null,
 };
 
 export type ModelAdminProfileConnection = {
@@ -709,13 +818,8 @@ export type ModelDriverProfileFilterInput = {
   and?: Array< ModelDriverProfileFilterInput | null > | null,
   or?: Array< ModelDriverProfileFilterInput | null > | null,
   not?: ModelDriverProfileFilterInput | null,
-  driverProfileDriverId?: ModelIDInput | null,
-};
-
-export type ModelDriverProfileConnection = {
-  __typename: "ModelDriverProfileConnection",
-  items:  Array<DriverProfile | null >,
-  nextToken?: string | null,
+  userSponsoredDriversId?: ModelIDInput | null,
+  driverProfileUserId?: ModelIDInput | null,
 };
 
 export type ModelReportFilterInput = {
@@ -729,8 +833,9 @@ export type ModelReportFilterInput = {
   and?: Array< ModelReportFilterInput | null > | null,
   or?: Array< ModelReportFilterInput | null > | null,
   not?: ModelReportFilterInput | null,
+  userAdminReportsId?: ModelIDInput | null,
+  userSponsorReportsId?: ModelIDInput | null,
   sponsorReportsId?: ModelIDInput | null,
-  administratorReportsId?: ModelIDInput | null,
 };
 
 export type ModelAuditLogFilterInput = {
@@ -752,17 +857,14 @@ export type ModelAuditLogConnection = {
   nextToken?: string | null,
 };
 
-export type ModelSubscriptionDriverFilterInput = {
+export type ModelSubscriptionBlogFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
-  points?: ModelSubscriptionIntInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionDriverFilterInput | null > | null,
-  or?: Array< ModelSubscriptionDriverFilterInput | null > | null,
-  driverPointHistoryId?: ModelSubscriptionIDInput | null,
-  driverPurchasesId?: ModelSubscriptionIDInput | null,
-  driverProfileId?: ModelSubscriptionIDInput | null,
+  and?: Array< ModelSubscriptionBlogFilterInput | null > | null,
+  or?: Array< ModelSubscriptionBlogFilterInput | null > | null,
+  blogPostsId?: ModelSubscriptionIDInput | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -795,7 +897,59 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
+export type ModelSubscriptionPostFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  title?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionPostFilterInput | null > | null,
+  or?: Array< ModelSubscriptionPostFilterInput | null > | null,
+  postCommentsId?: ModelSubscriptionIDInput | null,
+};
+
+export type ModelSubscriptionCommentFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  content?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionCommentFilterInput | null > | null,
+  or?: Array< ModelSubscriptionCommentFilterInput | null > | null,
+};
+
+export type ModelSubscriptionUserFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  username?: ModelSubscriptionStringInput | null,
+  email?: ModelSubscriptionStringInput | null,
+  role?: ModelSubscriptionStringInput | null,
+  points?: ModelSubscriptionIntInput | null,
+  pointConversionRate?: ModelSubscriptionFloatInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionUserFilterInput | null > | null,
+  or?: Array< ModelSubscriptionUserFilterInput | null > | null,
+  userPointHistoryId?: ModelSubscriptionIDInput | null,
+  userPurchasesId?: ModelSubscriptionIDInput | null,
+  userAdminReportsId?: ModelSubscriptionIDInput | null,
+  userSponsoredDriversId?: ModelSubscriptionIDInput | null,
+  userProductCatalogId?: ModelSubscriptionIDInput | null,
+  userSponsorReportsId?: ModelSubscriptionIDInput | null,
+  userDriverProfileId?: ModelSubscriptionIDInput | null,
+  userAdminProfileId?: ModelSubscriptionIDInput | null,
+};
+
 export type ModelSubscriptionIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
+};
+
+export type ModelSubscriptionFloatInput = {
   ne?: number | null,
   eq?: number | null,
   le?: number | null,
@@ -816,31 +970,8 @@ export type ModelSubscriptionSponsorFilterInput = {
   and?: Array< ModelSubscriptionSponsorFilterInput | null > | null,
   or?: Array< ModelSubscriptionSponsorFilterInput | null > | null,
   sponsorProductCatalogId?: ModelSubscriptionIDInput | null,
-  sponsorDriversId?: ModelSubscriptionIDInput | null,
-  sponsorSponsorUsersId?: ModelSubscriptionIDInput | null,
+  sponsorUsersId?: ModelSubscriptionIDInput | null,
   sponsorReportsId?: ModelSubscriptionIDInput | null,
-};
-
-export type ModelSubscriptionFloatInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  in?: Array< number | null > | null,
-  notIn?: Array< number | null > | null,
-};
-
-export type ModelSubscriptionSponsorUserFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  username?: ModelSubscriptionStringInput | null,
-  role?: ModelSubscriptionStringInput | null,
-  createdAt?: ModelSubscriptionStringInput | null,
-  updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionSponsorUserFilterInput | null > | null,
-  or?: Array< ModelSubscriptionSponsorUserFilterInput | null > | null,
 };
 
 export type ModelSubscriptionProductFilterInput = {
@@ -853,10 +984,12 @@ export type ModelSubscriptionProductFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionProductFilterInput | null > | null,
   or?: Array< ModelSubscriptionProductFilterInput | null > | null,
+  productPurchasesId?: ModelSubscriptionIDInput | null,
 };
 
 export type ModelSubscriptionPurchaseFilterInput = {
   id?: ModelSubscriptionIDInput | null,
+  productID?: ModelSubscriptionIDInput | null,
   status?: ModelSubscriptionStringInput | null,
   purchaseDate?: ModelSubscriptionStringInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
@@ -876,17 +1009,6 @@ export type ModelSubscriptionPointHistoryFilterInput = {
   or?: Array< ModelSubscriptionPointHistoryFilterInput | null > | null,
 };
 
-export type ModelSubscriptionAdministratorFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  username?: ModelSubscriptionStringInput | null,
-  createdAt?: ModelSubscriptionStringInput | null,
-  updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionAdministratorFilterInput | null > | null,
-  or?: Array< ModelSubscriptionAdministratorFilterInput | null > | null,
-  administratorReportsId?: ModelSubscriptionIDInput | null,
-  administratorProfileId?: ModelSubscriptionIDInput | null,
-};
-
 export type ModelSubscriptionAdminProfileFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   contactEmail?: ModelSubscriptionStringInput | null,
@@ -894,7 +1016,7 @@ export type ModelSubscriptionAdminProfileFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionAdminProfileFilterInput | null > | null,
   or?: Array< ModelSubscriptionAdminProfileFilterInput | null > | null,
-  adminProfileAdministratorId?: ModelSubscriptionIDInput | null,
+  adminProfileUserId?: ModelSubscriptionIDInput | null,
 };
 
 export type ModelSubscriptionDriverProfileFilterInput = {
@@ -905,7 +1027,7 @@ export type ModelSubscriptionDriverProfileFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionDriverProfileFilterInput | null > | null,
   or?: Array< ModelSubscriptionDriverProfileFilterInput | null > | null,
-  driverProfileDriverId?: ModelSubscriptionIDInput | null,
+  driverProfileUserId?: ModelSubscriptionIDInput | null,
 };
 
 export type ModelSubscriptionReportFilterInput = {
@@ -932,102 +1054,228 @@ export type ModelSubscriptionAuditLogFilterInput = {
   or?: Array< ModelSubscriptionAuditLogFilterInput | null > | null,
 };
 
-export type CreateDriverMutationVariables = {
-  input: CreateDriverInput,
-  condition?: ModelDriverConditionInput | null,
+export type CreateBlogMutationVariables = {
+  input: CreateBlogInput,
+  condition?: ModelBlogConditionInput | null,
 };
 
-export type CreateDriverMutation = {
-  createDriver?:  {
-    __typename: "Driver",
+export type CreateBlogMutation = {
+  createBlog?:  {
+    __typename: "Blog",
     id: string,
     name: string,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    points: number,
-    pointHistory?:  {
-      __typename: "ModelPointHistoryConnection",
-      nextToken?: string | null,
-    } | null,
-    profile?:  {
-      __typename: "DriverProfile",
-      id: string,
-      contactEmail: string,
-      applicationStatus: string,
-      createdAt: string,
-      updatedAt: string,
-      driverProfileDriverId?: string | null,
-    } | null,
-    purchases?:  {
-      __typename: "ModelPurchaseConnection",
+    posts?:  {
+      __typename: "ModelPostConnection",
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    sponsorDriversId?: string | null,
-    driverProfileId?: string | null,
   } | null,
 };
 
-export type UpdateDriverMutationVariables = {
-  input: UpdateDriverInput,
-  condition?: ModelDriverConditionInput | null,
+export type UpdateBlogMutationVariables = {
+  input: UpdateBlogInput,
+  condition?: ModelBlogConditionInput | null,
 };
 
-export type UpdateDriverMutation = {
-  updateDriver?:  {
-    __typename: "Driver",
+export type UpdateBlogMutation = {
+  updateBlog?:  {
+    __typename: "Blog",
     id: string,
     name: string,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    points: number,
-    pointHistory?:  {
-      __typename: "ModelPointHistoryConnection",
-      nextToken?: string | null,
-    } | null,
-    profile?:  {
-      __typename: "DriverProfile",
-      id: string,
-      contactEmail: string,
-      applicationStatus: string,
-      createdAt: string,
-      updatedAt: string,
-      driverProfileDriverId?: string | null,
-    } | null,
-    purchases?:  {
-      __typename: "ModelPurchaseConnection",
+    posts?:  {
+      __typename: "ModelPostConnection",
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    sponsorDriversId?: string | null,
-    driverProfileId?: string | null,
   } | null,
 };
 
-export type DeleteDriverMutationVariables = {
-  input: DeleteDriverInput,
-  condition?: ModelDriverConditionInput | null,
+export type DeleteBlogMutationVariables = {
+  input: DeleteBlogInput,
+  condition?: ModelBlogConditionInput | null,
 };
 
-export type DeleteDriverMutation = {
-  deleteDriver?:  {
-    __typename: "Driver",
+export type DeleteBlogMutation = {
+  deleteBlog?:  {
+    __typename: "Blog",
     id: string,
     name: string,
+    posts?:  {
+      __typename: "ModelPostConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreatePostMutationVariables = {
+  input: CreatePostInput,
+  condition?: ModelPostConditionInput | null,
+};
+
+export type CreatePostMutation = {
+  createPost?:  {
+    __typename: "Post",
+    id: string,
+    title: string,
+    blog?:  {
+      __typename: "Blog",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    blogPostsId?: string | null,
+  } | null,
+};
+
+export type UpdatePostMutationVariables = {
+  input: UpdatePostInput,
+  condition?: ModelPostConditionInput | null,
+};
+
+export type UpdatePostMutation = {
+  updatePost?:  {
+    __typename: "Post",
+    id: string,
+    title: string,
+    blog?:  {
+      __typename: "Blog",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    blogPostsId?: string | null,
+  } | null,
+};
+
+export type DeletePostMutationVariables = {
+  input: DeletePostInput,
+  condition?: ModelPostConditionInput | null,
+};
+
+export type DeletePostMutation = {
+  deletePost?:  {
+    __typename: "Post",
+    id: string,
+    title: string,
+    blog?:  {
+      __typename: "Blog",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    blogPostsId?: string | null,
+  } | null,
+};
+
+export type CreateCommentMutationVariables = {
+  input: CreateCommentInput,
+  condition?: ModelCommentConditionInput | null,
+};
+
+export type CreateCommentMutation = {
+  createComment?:  {
+    __typename: "Comment",
+    id: string,
+    post?:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      createdAt: string,
+      updatedAt: string,
+      blogPostsId?: string | null,
+    } | null,
+    content: string,
+    createdAt: string,
+    updatedAt: string,
+    postCommentsId?: string | null,
+  } | null,
+};
+
+export type UpdateCommentMutationVariables = {
+  input: UpdateCommentInput,
+  condition?: ModelCommentConditionInput | null,
+};
+
+export type UpdateCommentMutation = {
+  updateComment?:  {
+    __typename: "Comment",
+    id: string,
+    post?:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      createdAt: string,
+      updatedAt: string,
+      blogPostsId?: string | null,
+    } | null,
+    content: string,
+    createdAt: string,
+    updatedAt: string,
+    postCommentsId?: string | null,
+  } | null,
+};
+
+export type DeleteCommentMutationVariables = {
+  input: DeleteCommentInput,
+  condition?: ModelCommentConditionInput | null,
+};
+
+export type DeleteCommentMutation = {
+  deleteComment?:  {
+    __typename: "Comment",
+    id: string,
+    post?:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      createdAt: string,
+      updatedAt: string,
+      blogPostsId?: string | null,
+    } | null,
+    content: string,
+    createdAt: string,
+    updatedAt: string,
+    postCommentsId?: string | null,
+  } | null,
+};
+
+export type CreateUserMutationVariables = {
+  input: CreateUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type CreateUserMutation = {
+  createUser?:  {
+    __typename: "User",
+    id: string,
+    username: string,
+    email: string,
+    role: UserRole,
     sponsor?:  {
       __typename: "Sponsor",
       id: string,
@@ -1036,28 +1284,199 @@ export type DeleteDriverMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    points: number,
+    points?: number | null,
     pointHistory?:  {
       __typename: "ModelPointHistoryConnection",
       nextToken?: string | null,
     } | null,
-    profile?:  {
+    driverProfile?:  {
       __typename: "DriverProfile",
       id: string,
       contactEmail: string,
       applicationStatus: string,
       createdAt: string,
       updatedAt: string,
-      driverProfileDriverId?: string | null,
+      userSponsoredDriversId?: string | null,
+      driverProfileUserId?: string | null,
     } | null,
     purchases?:  {
       __typename: "ModelPurchaseConnection",
       nextToken?: string | null,
     } | null,
+    adminProfile?:  {
+      __typename: "AdminProfile",
+      id: string,
+      contactEmail: string,
+      createdAt: string,
+      updatedAt: string,
+      adminProfileUserId?: string | null,
+    } | null,
+    adminReports?:  {
+      __typename: "ModelReportConnection",
+      nextToken?: string | null,
+    } | null,
+    sponsoredDrivers?:  {
+      __typename: "ModelDriverProfileConnection",
+      nextToken?: string | null,
+    } | null,
+    productCatalog?:  {
+      __typename: "ModelProductConnection",
+      nextToken?: string | null,
+    } | null,
+    pointConversionRate?: number | null,
+    sponsorReports?:  {
+      __typename: "ModelReportConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    sponsorDriversId?: string | null,
-    driverProfileId?: string | null,
+    sponsorUsersId?: string | null,
+    userDriverProfileId?: string | null,
+    userAdminProfileId?: string | null,
+  } | null,
+};
+
+export type UpdateUserMutationVariables = {
+  input: UpdateUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type UpdateUserMutation = {
+  updateUser?:  {
+    __typename: "User",
+    id: string,
+    username: string,
+    email: string,
+    role: UserRole,
+    sponsor?:  {
+      __typename: "Sponsor",
+      id: string,
+      name: string,
+      pointConversionRate: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    points?: number | null,
+    pointHistory?:  {
+      __typename: "ModelPointHistoryConnection",
+      nextToken?: string | null,
+    } | null,
+    driverProfile?:  {
+      __typename: "DriverProfile",
+      id: string,
+      contactEmail: string,
+      applicationStatus: string,
+      createdAt: string,
+      updatedAt: string,
+      userSponsoredDriversId?: string | null,
+      driverProfileUserId?: string | null,
+    } | null,
+    purchases?:  {
+      __typename: "ModelPurchaseConnection",
+      nextToken?: string | null,
+    } | null,
+    adminProfile?:  {
+      __typename: "AdminProfile",
+      id: string,
+      contactEmail: string,
+      createdAt: string,
+      updatedAt: string,
+      adminProfileUserId?: string | null,
+    } | null,
+    adminReports?:  {
+      __typename: "ModelReportConnection",
+      nextToken?: string | null,
+    } | null,
+    sponsoredDrivers?:  {
+      __typename: "ModelDriverProfileConnection",
+      nextToken?: string | null,
+    } | null,
+    productCatalog?:  {
+      __typename: "ModelProductConnection",
+      nextToken?: string | null,
+    } | null,
+    pointConversionRate?: number | null,
+    sponsorReports?:  {
+      __typename: "ModelReportConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    sponsorUsersId?: string | null,
+    userDriverProfileId?: string | null,
+    userAdminProfileId?: string | null,
+  } | null,
+};
+
+export type DeleteUserMutationVariables = {
+  input: DeleteUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type DeleteUserMutation = {
+  deleteUser?:  {
+    __typename: "User",
+    id: string,
+    username: string,
+    email: string,
+    role: UserRole,
+    sponsor?:  {
+      __typename: "Sponsor",
+      id: string,
+      name: string,
+      pointConversionRate: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    points?: number | null,
+    pointHistory?:  {
+      __typename: "ModelPointHistoryConnection",
+      nextToken?: string | null,
+    } | null,
+    driverProfile?:  {
+      __typename: "DriverProfile",
+      id: string,
+      contactEmail: string,
+      applicationStatus: string,
+      createdAt: string,
+      updatedAt: string,
+      userSponsoredDriversId?: string | null,
+      driverProfileUserId?: string | null,
+    } | null,
+    purchases?:  {
+      __typename: "ModelPurchaseConnection",
+      nextToken?: string | null,
+    } | null,
+    adminProfile?:  {
+      __typename: "AdminProfile",
+      id: string,
+      contactEmail: string,
+      createdAt: string,
+      updatedAt: string,
+      adminProfileUserId?: string | null,
+    } | null,
+    adminReports?:  {
+      __typename: "ModelReportConnection",
+      nextToken?: string | null,
+    } | null,
+    sponsoredDrivers?:  {
+      __typename: "ModelDriverProfileConnection",
+      nextToken?: string | null,
+    } | null,
+    productCatalog?:  {
+      __typename: "ModelProductConnection",
+      nextToken?: string | null,
+    } | null,
+    pointConversionRate?: number | null,
+    sponsorReports?:  {
+      __typename: "ModelReportConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    sponsorUsersId?: string | null,
+    userDriverProfileId?: string | null,
+    userAdminProfileId?: string | null,
   } | null,
 };
 
@@ -1075,13 +1494,9 @@ export type CreateSponsorMutation = {
       __typename: "ModelProductConnection",
       nextToken?: string | null,
     } | null,
-    drivers?:  {
-      __typename: "ModelDriverConnection",
-      nextToken?: string | null,
-    } | null,
     pointConversionRate: number,
-    sponsorUsers?:  {
-      __typename: "ModelSponsorUserConnection",
+    users?:  {
+      __typename: "ModelUserConnection",
       nextToken?: string | null,
     } | null,
     reports?:  {
@@ -1107,13 +1522,9 @@ export type UpdateSponsorMutation = {
       __typename: "ModelProductConnection",
       nextToken?: string | null,
     } | null,
-    drivers?:  {
-      __typename: "ModelDriverConnection",
-      nextToken?: string | null,
-    } | null,
     pointConversionRate: number,
-    sponsorUsers?:  {
-      __typename: "ModelSponsorUserConnection",
+    users?:  {
+      __typename: "ModelUserConnection",
       nextToken?: string | null,
     } | null,
     reports?:  {
@@ -1139,13 +1550,9 @@ export type DeleteSponsorMutation = {
       __typename: "ModelProductConnection",
       nextToken?: string | null,
     } | null,
-    drivers?:  {
-      __typename: "ModelDriverConnection",
-      nextToken?: string | null,
-    } | null,
     pointConversionRate: number,
-    sponsorUsers?:  {
-      __typename: "ModelSponsorUserConnection",
+    users?:  {
+      __typename: "ModelUserConnection",
       nextToken?: string | null,
     } | null,
     reports?:  {
@@ -1154,81 +1561,6 @@ export type DeleteSponsorMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
-  } | null,
-};
-
-export type CreateSponsorUserMutationVariables = {
-  input: CreateSponsorUserInput,
-  condition?: ModelSponsorUserConditionInput | null,
-};
-
-export type CreateSponsorUserMutation = {
-  createSponsorUser?:  {
-    __typename: "SponsorUser",
-    id: string,
-    username: string,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    role: string,
-    createdAt: string,
-    updatedAt: string,
-    sponsorSponsorUsersId?: string | null,
-  } | null,
-};
-
-export type UpdateSponsorUserMutationVariables = {
-  input: UpdateSponsorUserInput,
-  condition?: ModelSponsorUserConditionInput | null,
-};
-
-export type UpdateSponsorUserMutation = {
-  updateSponsorUser?:  {
-    __typename: "SponsorUser",
-    id: string,
-    username: string,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    role: string,
-    createdAt: string,
-    updatedAt: string,
-    sponsorSponsorUsersId?: string | null,
-  } | null,
-};
-
-export type DeleteSponsorUserMutationVariables = {
-  input: DeleteSponsorUserInput,
-  condition?: ModelSponsorUserConditionInput | null,
-};
-
-export type DeleteSponsorUserMutation = {
-  deleteSponsorUser?:  {
-    __typename: "SponsorUser",
-    id: string,
-    username: string,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    role: string,
-    createdAt: string,
-    updatedAt: string,
-    sponsorSponsorUsersId?: string | null,
   } | null,
 };
 
@@ -1245,16 +1577,13 @@ export type CreateProductMutation = {
     description: string,
     price: number,
     pointsValue: number,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
+    purchases?:  {
+      __typename: "ModelPurchaseConnection",
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    userProductCatalogId?: string | null,
     sponsorProductCatalogId?: string | null,
   } | null,
 };
@@ -1272,16 +1601,13 @@ export type UpdateProductMutation = {
     description: string,
     price: number,
     pointsValue: number,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
+    purchases?:  {
+      __typename: "ModelPurchaseConnection",
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    userProductCatalogId?: string | null,
     sponsorProductCatalogId?: string | null,
   } | null,
 };
@@ -1299,16 +1625,13 @@ export type DeleteProductMutation = {
     description: string,
     price: number,
     pointsValue: number,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
+    purchases?:  {
+      __typename: "ModelPurchaseConnection",
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    userProductCatalogId?: string | null,
     sponsorProductCatalogId?: string | null,
   } | null,
 };
@@ -1322,21 +1645,39 @@ export type CreatePurchaseMutation = {
   createPurchase?:  {
     __typename: "Purchase",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
+    product?:  {
+      __typename: "Product",
+      id: string,
+      name: string,
+      description: string,
+      price: number,
+      pointsValue: number,
+      createdAt: string,
+      updatedAt: string,
+      userProductCatalogId?: string | null,
+      sponsorProductCatalogId?: string | null,
+    } | null,
+    productID: string,
     status: string,
     purchaseDate: string,
     createdAt: string,
     updatedAt: string,
-    driverPurchasesId?: string | null,
+    userPurchasesId?: string | null,
+    productPurchasesId?: string | null,
   } | null,
 };
 
@@ -1349,21 +1690,39 @@ export type UpdatePurchaseMutation = {
   updatePurchase?:  {
     __typename: "Purchase",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
+    product?:  {
+      __typename: "Product",
+      id: string,
+      name: string,
+      description: string,
+      price: number,
+      pointsValue: number,
+      createdAt: string,
+      updatedAt: string,
+      userProductCatalogId?: string | null,
+      sponsorProductCatalogId?: string | null,
+    } | null,
+    productID: string,
     status: string,
     purchaseDate: string,
     createdAt: string,
     updatedAt: string,
-    driverPurchasesId?: string | null,
+    userPurchasesId?: string | null,
+    productPurchasesId?: string | null,
   } | null,
 };
 
@@ -1376,21 +1735,39 @@ export type DeletePurchaseMutation = {
   deletePurchase?:  {
     __typename: "Purchase",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
+    product?:  {
+      __typename: "Product",
+      id: string,
+      name: string,
+      description: string,
+      price: number,
+      pointsValue: number,
+      createdAt: string,
+      updatedAt: string,
+      userProductCatalogId?: string | null,
+      sponsorProductCatalogId?: string | null,
+    } | null,
+    productID: string,
     status: string,
     purchaseDate: string,
     createdAt: string,
     updatedAt: string,
-    driverPurchasesId?: string | null,
+    userPurchasesId?: string | null,
+    productPurchasesId?: string | null,
   } | null,
 };
 
@@ -1403,22 +1780,26 @@ export type CreatePointHistoryMutation = {
   createPointHistory?:  {
     __typename: "PointHistory",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     date: string,
     pointsChange: number,
     reason: string,
     createdAt: string,
     updatedAt: string,
-    driverPointHistoryId?: string | null,
+    userPointHistoryId?: string | null,
   } | null,
 };
 
@@ -1431,22 +1812,26 @@ export type UpdatePointHistoryMutation = {
   updatePointHistory?:  {
     __typename: "PointHistory",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     date: string,
     pointsChange: number,
     reason: string,
     createdAt: string,
     updatedAt: string,
-    driverPointHistoryId?: string | null,
+    userPointHistoryId?: string | null,
   } | null,
 };
 
@@ -1459,106 +1844,26 @@ export type DeletePointHistoryMutation = {
   deletePointHistory?:  {
     __typename: "PointHistory",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     date: string,
     pointsChange: number,
     reason: string,
     createdAt: string,
     updatedAt: string,
-    driverPointHistoryId?: string | null,
-  } | null,
-};
-
-export type CreateAdministratorMutationVariables = {
-  input: CreateAdministratorInput,
-  condition?: ModelAdministratorConditionInput | null,
-};
-
-export type CreateAdministratorMutation = {
-  createAdministrator?:  {
-    __typename: "Administrator",
-    id: string,
-    username: string,
-    profile?:  {
-      __typename: "AdminProfile",
-      id: string,
-      contactEmail: string,
-      createdAt: string,
-      updatedAt: string,
-      adminProfileAdministratorId?: string | null,
-    } | null,
-    reports?:  {
-      __typename: "ModelReportConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    administratorProfileId?: string | null,
-  } | null,
-};
-
-export type UpdateAdministratorMutationVariables = {
-  input: UpdateAdministratorInput,
-  condition?: ModelAdministratorConditionInput | null,
-};
-
-export type UpdateAdministratorMutation = {
-  updateAdministrator?:  {
-    __typename: "Administrator",
-    id: string,
-    username: string,
-    profile?:  {
-      __typename: "AdminProfile",
-      id: string,
-      contactEmail: string,
-      createdAt: string,
-      updatedAt: string,
-      adminProfileAdministratorId?: string | null,
-    } | null,
-    reports?:  {
-      __typename: "ModelReportConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    administratorProfileId?: string | null,
-  } | null,
-};
-
-export type DeleteAdministratorMutationVariables = {
-  input: DeleteAdministratorInput,
-  condition?: ModelAdministratorConditionInput | null,
-};
-
-export type DeleteAdministratorMutation = {
-  deleteAdministrator?:  {
-    __typename: "Administrator",
-    id: string,
-    username: string,
-    profile?:  {
-      __typename: "AdminProfile",
-      id: string,
-      contactEmail: string,
-      createdAt: string,
-      updatedAt: string,
-      adminProfileAdministratorId?: string | null,
-    } | null,
-    reports?:  {
-      __typename: "ModelReportConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    administratorProfileId?: string | null,
+    userPointHistoryId?: string | null,
   } | null,
 };
 
@@ -1571,18 +1876,24 @@ export type CreateAdminProfileMutation = {
   createAdminProfile?:  {
     __typename: "AdminProfile",
     id: string,
-    administrator?:  {
-      __typename: "Administrator",
+    user?:  {
+      __typename: "User",
       id: string,
       username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      administratorProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     contactEmail: string,
     createdAt: string,
     updatedAt: string,
-    adminProfileAdministratorId?: string | null,
+    adminProfileUserId?: string | null,
   } | null,
 };
 
@@ -1595,18 +1906,24 @@ export type UpdateAdminProfileMutation = {
   updateAdminProfile?:  {
     __typename: "AdminProfile",
     id: string,
-    administrator?:  {
-      __typename: "Administrator",
+    user?:  {
+      __typename: "User",
       id: string,
       username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      administratorProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     contactEmail: string,
     createdAt: string,
     updatedAt: string,
-    adminProfileAdministratorId?: string | null,
+    adminProfileUserId?: string | null,
   } | null,
 };
 
@@ -1619,18 +1936,24 @@ export type DeleteAdminProfileMutation = {
   deleteAdminProfile?:  {
     __typename: "AdminProfile",
     id: string,
-    administrator?:  {
-      __typename: "Administrator",
+    user?:  {
+      __typename: "User",
       id: string,
       username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      administratorProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     contactEmail: string,
     createdAt: string,
     updatedAt: string,
-    adminProfileAdministratorId?: string | null,
+    adminProfileUserId?: string | null,
   } | null,
 };
 
@@ -1643,21 +1966,26 @@ export type CreateDriverProfileMutation = {
   createDriverProfile?:  {
     __typename: "DriverProfile",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     contactEmail: string,
     applicationStatus: string,
     createdAt: string,
     updatedAt: string,
-    driverProfileDriverId?: string | null,
+    userSponsoredDriversId?: string | null,
+    driverProfileUserId?: string | null,
   } | null,
 };
 
@@ -1670,21 +1998,26 @@ export type UpdateDriverProfileMutation = {
   updateDriverProfile?:  {
     __typename: "DriverProfile",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     contactEmail: string,
     applicationStatus: string,
     createdAt: string,
     updatedAt: string,
-    driverProfileDriverId?: string | null,
+    userSponsoredDriversId?: string | null,
+    driverProfileUserId?: string | null,
   } | null,
 };
 
@@ -1697,21 +2030,26 @@ export type DeleteDriverProfileMutation = {
   deleteDriverProfile?:  {
     __typename: "DriverProfile",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     contactEmail: string,
     applicationStatus: string,
     createdAt: string,
     updatedAt: string,
-    driverProfileDriverId?: string | null,
+    userSponsoredDriversId?: string | null,
+    driverProfileUserId?: string | null,
   } | null,
 };
 
@@ -1726,12 +2064,18 @@ export type CreateReportMutation = {
     id: string,
     type: string,
     generatedBy?:  {
-      __typename: "Administrator",
+      __typename: "User",
       id: string,
       username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      administratorProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     sponsor?:  {
       __typename: "Sponsor",
@@ -1746,8 +2090,9 @@ export type CreateReportMutation = {
     reportData: string,
     createdAt: string,
     updatedAt: string,
+    userAdminReportsId?: string | null,
+    userSponsorReportsId?: string | null,
     sponsorReportsId?: string | null,
-    administratorReportsId?: string | null,
   } | null,
 };
 
@@ -1762,12 +2107,18 @@ export type UpdateReportMutation = {
     id: string,
     type: string,
     generatedBy?:  {
-      __typename: "Administrator",
+      __typename: "User",
       id: string,
       username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      administratorProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     sponsor?:  {
       __typename: "Sponsor",
@@ -1782,8 +2133,9 @@ export type UpdateReportMutation = {
     reportData: string,
     createdAt: string,
     updatedAt: string,
+    userAdminReportsId?: string | null,
+    userSponsorReportsId?: string | null,
     sponsorReportsId?: string | null,
-    administratorReportsId?: string | null,
   } | null,
 };
 
@@ -1798,12 +2150,18 @@ export type DeleteReportMutation = {
     id: string,
     type: string,
     generatedBy?:  {
-      __typename: "Administrator",
+      __typename: "User",
       id: string,
       username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      administratorProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     sponsor?:  {
       __typename: "Sponsor",
@@ -1818,8 +2176,9 @@ export type DeleteReportMutation = {
     reportData: string,
     createdAt: string,
     updatedAt: string,
+    userAdminReportsId?: string | null,
+    userSponsorReportsId?: string | null,
     sponsorReportsId?: string | null,
-    administratorReportsId?: string | null,
   } | null,
 };
 
@@ -1877,15 +2236,146 @@ export type DeleteAuditLogMutation = {
   } | null,
 };
 
-export type GetDriverQueryVariables = {
+export type GetBlogQueryVariables = {
   id: string,
 };
 
-export type GetDriverQuery = {
-  getDriver?:  {
-    __typename: "Driver",
+export type GetBlogQuery = {
+  getBlog?:  {
+    __typename: "Blog",
     id: string,
     name: string,
+    posts?:  {
+      __typename: "ModelPostConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListBlogsQueryVariables = {
+  filter?: ModelBlogFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListBlogsQuery = {
+  listBlogs?:  {
+    __typename: "ModelBlogConnection",
+    items:  Array< {
+      __typename: "Blog",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetPostQueryVariables = {
+  id: string,
+};
+
+export type GetPostQuery = {
+  getPost?:  {
+    __typename: "Post",
+    id: string,
+    title: string,
+    blog?:  {
+      __typename: "Blog",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    blogPostsId?: string | null,
+  } | null,
+};
+
+export type ListPostsQueryVariables = {
+  filter?: ModelPostFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPostsQuery = {
+  listPosts?:  {
+    __typename: "ModelPostConnection",
+    items:  Array< {
+      __typename: "Post",
+      id: string,
+      title: string,
+      createdAt: string,
+      updatedAt: string,
+      blogPostsId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetCommentQueryVariables = {
+  id: string,
+};
+
+export type GetCommentQuery = {
+  getComment?:  {
+    __typename: "Comment",
+    id: string,
+    post?:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      createdAt: string,
+      updatedAt: string,
+      blogPostsId?: string | null,
+    } | null,
+    content: string,
+    createdAt: string,
+    updatedAt: string,
+    postCommentsId?: string | null,
+  } | null,
+};
+
+export type ListCommentsQueryVariables = {
+  filter?: ModelCommentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListCommentsQuery = {
+  listComments?:  {
+    __typename: "ModelCommentConnection",
+    items:  Array< {
+      __typename: "Comment",
+      id: string,
+      content: string,
+      createdAt: string,
+      updatedAt: string,
+      postCommentsId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetUserQueryVariables = {
+  id: string,
+};
+
+export type GetUserQuery = {
+  getUser?:  {
+    __typename: "User",
+    id: string,
+    username: string,
+    email: string,
+    role: UserRole,
     sponsor?:  {
       __typename: "Sponsor",
       id: string,
@@ -1894,49 +2384,80 @@ export type GetDriverQuery = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    points: number,
+    points?: number | null,
     pointHistory?:  {
       __typename: "ModelPointHistoryConnection",
       nextToken?: string | null,
     } | null,
-    profile?:  {
+    driverProfile?:  {
       __typename: "DriverProfile",
       id: string,
       contactEmail: string,
       applicationStatus: string,
       createdAt: string,
       updatedAt: string,
-      driverProfileDriverId?: string | null,
+      userSponsoredDriversId?: string | null,
+      driverProfileUserId?: string | null,
     } | null,
     purchases?:  {
       __typename: "ModelPurchaseConnection",
       nextToken?: string | null,
     } | null,
+    adminProfile?:  {
+      __typename: "AdminProfile",
+      id: string,
+      contactEmail: string,
+      createdAt: string,
+      updatedAt: string,
+      adminProfileUserId?: string | null,
+    } | null,
+    adminReports?:  {
+      __typename: "ModelReportConnection",
+      nextToken?: string | null,
+    } | null,
+    sponsoredDrivers?:  {
+      __typename: "ModelDriverProfileConnection",
+      nextToken?: string | null,
+    } | null,
+    productCatalog?:  {
+      __typename: "ModelProductConnection",
+      nextToken?: string | null,
+    } | null,
+    pointConversionRate?: number | null,
+    sponsorReports?:  {
+      __typename: "ModelReportConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    sponsorDriversId?: string | null,
-    driverProfileId?: string | null,
+    sponsorUsersId?: string | null,
+    userDriverProfileId?: string | null,
+    userAdminProfileId?: string | null,
   } | null,
 };
 
-export type ListDriversQueryVariables = {
-  filter?: ModelDriverFilterInput | null,
+export type ListUsersQueryVariables = {
+  filter?: ModelUserFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListDriversQuery = {
-  listDrivers?:  {
-    __typename: "ModelDriverConnection",
+export type ListUsersQuery = {
+  listUsers?:  {
+    __typename: "ModelUserConnection",
     items:  Array< {
-      __typename: "Driver",
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1955,13 +2476,9 @@ export type GetSponsorQuery = {
       __typename: "ModelProductConnection",
       nextToken?: string | null,
     } | null,
-    drivers?:  {
-      __typename: "ModelDriverConnection",
-      nextToken?: string | null,
-    } | null,
     pointConversionRate: number,
-    sponsorUsers?:  {
-      __typename: "ModelSponsorUserConnection",
+    users?:  {
+      __typename: "ModelUserConnection",
       nextToken?: string | null,
     } | null,
     reports?:  {
@@ -1994,52 +2511,6 @@ export type ListSponsorsQuery = {
   } | null,
 };
 
-export type GetSponsorUserQueryVariables = {
-  id: string,
-};
-
-export type GetSponsorUserQuery = {
-  getSponsorUser?:  {
-    __typename: "SponsorUser",
-    id: string,
-    username: string,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    role: string,
-    createdAt: string,
-    updatedAt: string,
-    sponsorSponsorUsersId?: string | null,
-  } | null,
-};
-
-export type ListSponsorUsersQueryVariables = {
-  filter?: ModelSponsorUserFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListSponsorUsersQuery = {
-  listSponsorUsers?:  {
-    __typename: "ModelSponsorUserConnection",
-    items:  Array< {
-      __typename: "SponsorUser",
-      id: string,
-      username: string,
-      role: string,
-      createdAt: string,
-      updatedAt: string,
-      sponsorSponsorUsersId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
 export type GetProductQueryVariables = {
   id: string,
 };
@@ -2052,16 +2523,13 @@ export type GetProductQuery = {
     description: string,
     price: number,
     pointsValue: number,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
+    purchases?:  {
+      __typename: "ModelPurchaseConnection",
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    userProductCatalogId?: string | null,
     sponsorProductCatalogId?: string | null,
   } | null,
 };
@@ -2084,6 +2552,7 @@ export type ListProductsQuery = {
       pointsValue: number,
       createdAt: string,
       updatedAt: string,
+      userProductCatalogId?: string | null,
       sponsorProductCatalogId?: string | null,
     } | null >,
     nextToken?: string | null,
@@ -2098,21 +2567,39 @@ export type GetPurchaseQuery = {
   getPurchase?:  {
     __typename: "Purchase",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
+    product?:  {
+      __typename: "Product",
+      id: string,
+      name: string,
+      description: string,
+      price: number,
+      pointsValue: number,
+      createdAt: string,
+      updatedAt: string,
+      userProductCatalogId?: string | null,
+      sponsorProductCatalogId?: string | null,
+    } | null,
+    productID: string,
     status: string,
     purchaseDate: string,
     createdAt: string,
     updatedAt: string,
-    driverPurchasesId?: string | null,
+    userPurchasesId?: string | null,
+    productPurchasesId?: string | null,
   } | null,
 };
 
@@ -2128,11 +2615,13 @@ export type ListPurchasesQuery = {
     items:  Array< {
       __typename: "Purchase",
       id: string,
+      productID: string,
       status: string,
       purchaseDate: string,
       createdAt: string,
       updatedAt: string,
-      driverPurchasesId?: string | null,
+      userPurchasesId?: string | null,
+      productPurchasesId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -2146,22 +2635,26 @@ export type GetPointHistoryQuery = {
   getPointHistory?:  {
     __typename: "PointHistory",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     date: string,
     pointsChange: number,
     reason: string,
     createdAt: string,
     updatedAt: string,
-    driverPointHistoryId?: string | null,
+    userPointHistoryId?: string | null,
   } | null,
 };
 
@@ -2182,55 +2675,7 @@ export type ListPointHistoriesQuery = {
       reason: string,
       createdAt: string,
       updatedAt: string,
-      driverPointHistoryId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetAdministratorQueryVariables = {
-  id: string,
-};
-
-export type GetAdministratorQuery = {
-  getAdministrator?:  {
-    __typename: "Administrator",
-    id: string,
-    username: string,
-    profile?:  {
-      __typename: "AdminProfile",
-      id: string,
-      contactEmail: string,
-      createdAt: string,
-      updatedAt: string,
-      adminProfileAdministratorId?: string | null,
-    } | null,
-    reports?:  {
-      __typename: "ModelReportConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    administratorProfileId?: string | null,
-  } | null,
-};
-
-export type ListAdministratorsQueryVariables = {
-  filter?: ModelAdministratorFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListAdministratorsQuery = {
-  listAdministrators?:  {
-    __typename: "ModelAdministratorConnection",
-    items:  Array< {
-      __typename: "Administrator",
-      id: string,
-      username: string,
-      createdAt: string,
-      updatedAt: string,
-      administratorProfileId?: string | null,
+      userPointHistoryId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -2244,18 +2689,24 @@ export type GetAdminProfileQuery = {
   getAdminProfile?:  {
     __typename: "AdminProfile",
     id: string,
-    administrator?:  {
-      __typename: "Administrator",
+    user?:  {
+      __typename: "User",
       id: string,
       username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      administratorProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     contactEmail: string,
     createdAt: string,
     updatedAt: string,
-    adminProfileAdministratorId?: string | null,
+    adminProfileUserId?: string | null,
   } | null,
 };
 
@@ -2274,7 +2725,7 @@ export type ListAdminProfilesQuery = {
       contactEmail: string,
       createdAt: string,
       updatedAt: string,
-      adminProfileAdministratorId?: string | null,
+      adminProfileUserId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -2288,21 +2739,26 @@ export type GetDriverProfileQuery = {
   getDriverProfile?:  {
     __typename: "DriverProfile",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     contactEmail: string,
     applicationStatus: string,
     createdAt: string,
     updatedAt: string,
-    driverProfileDriverId?: string | null,
+    userSponsoredDriversId?: string | null,
+    driverProfileUserId?: string | null,
   } | null,
 };
 
@@ -2322,7 +2778,8 @@ export type ListDriverProfilesQuery = {
       applicationStatus: string,
       createdAt: string,
       updatedAt: string,
-      driverProfileDriverId?: string | null,
+      userSponsoredDriversId?: string | null,
+      driverProfileUserId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -2338,12 +2795,18 @@ export type GetReportQuery = {
     id: string,
     type: string,
     generatedBy?:  {
-      __typename: "Administrator",
+      __typename: "User",
       id: string,
       username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      administratorProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     sponsor?:  {
       __typename: "Sponsor",
@@ -2358,8 +2821,9 @@ export type GetReportQuery = {
     reportData: string,
     createdAt: string,
     updatedAt: string,
+    userAdminReportsId?: string | null,
+    userSponsorReportsId?: string | null,
     sponsorReportsId?: string | null,
-    administratorReportsId?: string | null,
   } | null,
 };
 
@@ -2381,8 +2845,9 @@ export type ListReportsQuery = {
       reportData: string,
       createdAt: string,
       updatedAt: string,
+      userAdminReportsId?: string | null,
+      userSponsorReportsId?: string | null,
       sponsorReportsId?: string | null,
-      administratorReportsId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -2428,99 +2893,218 @@ export type ListAuditLogsQuery = {
   } | null,
 };
 
-export type OnCreateDriverSubscriptionVariables = {
-  filter?: ModelSubscriptionDriverFilterInput | null,
+export type OnCreateBlogSubscriptionVariables = {
+  filter?: ModelSubscriptionBlogFilterInput | null,
 };
 
-export type OnCreateDriverSubscription = {
-  onCreateDriver?:  {
-    __typename: "Driver",
+export type OnCreateBlogSubscription = {
+  onCreateBlog?:  {
+    __typename: "Blog",
     id: string,
     name: string,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    points: number,
-    pointHistory?:  {
-      __typename: "ModelPointHistoryConnection",
-      nextToken?: string | null,
-    } | null,
-    profile?:  {
-      __typename: "DriverProfile",
-      id: string,
-      contactEmail: string,
-      applicationStatus: string,
-      createdAt: string,
-      updatedAt: string,
-      driverProfileDriverId?: string | null,
-    } | null,
-    purchases?:  {
-      __typename: "ModelPurchaseConnection",
+    posts?:  {
+      __typename: "ModelPostConnection",
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    sponsorDriversId?: string | null,
-    driverProfileId?: string | null,
   } | null,
 };
 
-export type OnUpdateDriverSubscriptionVariables = {
-  filter?: ModelSubscriptionDriverFilterInput | null,
+export type OnUpdateBlogSubscriptionVariables = {
+  filter?: ModelSubscriptionBlogFilterInput | null,
 };
 
-export type OnUpdateDriverSubscription = {
-  onUpdateDriver?:  {
-    __typename: "Driver",
+export type OnUpdateBlogSubscription = {
+  onUpdateBlog?:  {
+    __typename: "Blog",
     id: string,
     name: string,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    points: number,
-    pointHistory?:  {
-      __typename: "ModelPointHistoryConnection",
-      nextToken?: string | null,
-    } | null,
-    profile?:  {
-      __typename: "DriverProfile",
-      id: string,
-      contactEmail: string,
-      applicationStatus: string,
-      createdAt: string,
-      updatedAt: string,
-      driverProfileDriverId?: string | null,
-    } | null,
-    purchases?:  {
-      __typename: "ModelPurchaseConnection",
+    posts?:  {
+      __typename: "ModelPostConnection",
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    sponsorDriversId?: string | null,
-    driverProfileId?: string | null,
   } | null,
 };
 
-export type OnDeleteDriverSubscriptionVariables = {
-  filter?: ModelSubscriptionDriverFilterInput | null,
+export type OnDeleteBlogSubscriptionVariables = {
+  filter?: ModelSubscriptionBlogFilterInput | null,
 };
 
-export type OnDeleteDriverSubscription = {
-  onDeleteDriver?:  {
-    __typename: "Driver",
+export type OnDeleteBlogSubscription = {
+  onDeleteBlog?:  {
+    __typename: "Blog",
     id: string,
     name: string,
+    posts?:  {
+      __typename: "ModelPostConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreatePostSubscriptionVariables = {
+  filter?: ModelSubscriptionPostFilterInput | null,
+};
+
+export type OnCreatePostSubscription = {
+  onCreatePost?:  {
+    __typename: "Post",
+    id: string,
+    title: string,
+    blog?:  {
+      __typename: "Blog",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    blogPostsId?: string | null,
+  } | null,
+};
+
+export type OnUpdatePostSubscriptionVariables = {
+  filter?: ModelSubscriptionPostFilterInput | null,
+};
+
+export type OnUpdatePostSubscription = {
+  onUpdatePost?:  {
+    __typename: "Post",
+    id: string,
+    title: string,
+    blog?:  {
+      __typename: "Blog",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    blogPostsId?: string | null,
+  } | null,
+};
+
+export type OnDeletePostSubscriptionVariables = {
+  filter?: ModelSubscriptionPostFilterInput | null,
+};
+
+export type OnDeletePostSubscription = {
+  onDeletePost?:  {
+    __typename: "Post",
+    id: string,
+    title: string,
+    blog?:  {
+      __typename: "Blog",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    comments?:  {
+      __typename: "ModelCommentConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    blogPostsId?: string | null,
+  } | null,
+};
+
+export type OnCreateCommentSubscriptionVariables = {
+  filter?: ModelSubscriptionCommentFilterInput | null,
+};
+
+export type OnCreateCommentSubscription = {
+  onCreateComment?:  {
+    __typename: "Comment",
+    id: string,
+    post?:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      createdAt: string,
+      updatedAt: string,
+      blogPostsId?: string | null,
+    } | null,
+    content: string,
+    createdAt: string,
+    updatedAt: string,
+    postCommentsId?: string | null,
+  } | null,
+};
+
+export type OnUpdateCommentSubscriptionVariables = {
+  filter?: ModelSubscriptionCommentFilterInput | null,
+};
+
+export type OnUpdateCommentSubscription = {
+  onUpdateComment?:  {
+    __typename: "Comment",
+    id: string,
+    post?:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      createdAt: string,
+      updatedAt: string,
+      blogPostsId?: string | null,
+    } | null,
+    content: string,
+    createdAt: string,
+    updatedAt: string,
+    postCommentsId?: string | null,
+  } | null,
+};
+
+export type OnDeleteCommentSubscriptionVariables = {
+  filter?: ModelSubscriptionCommentFilterInput | null,
+};
+
+export type OnDeleteCommentSubscription = {
+  onDeleteComment?:  {
+    __typename: "Comment",
+    id: string,
+    post?:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      createdAt: string,
+      updatedAt: string,
+      blogPostsId?: string | null,
+    } | null,
+    content: string,
+    createdAt: string,
+    updatedAt: string,
+    postCommentsId?: string | null,
+  } | null,
+};
+
+export type OnCreateUserSubscriptionVariables = {
+  filter?: ModelSubscriptionUserFilterInput | null,
+};
+
+export type OnCreateUserSubscription = {
+  onCreateUser?:  {
+    __typename: "User",
+    id: string,
+    username: string,
+    email: string,
+    role: UserRole,
     sponsor?:  {
       __typename: "Sponsor",
       id: string,
@@ -2529,28 +3113,197 @@ export type OnDeleteDriverSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    points: number,
+    points?: number | null,
     pointHistory?:  {
       __typename: "ModelPointHistoryConnection",
       nextToken?: string | null,
     } | null,
-    profile?:  {
+    driverProfile?:  {
       __typename: "DriverProfile",
       id: string,
       contactEmail: string,
       applicationStatus: string,
       createdAt: string,
       updatedAt: string,
-      driverProfileDriverId?: string | null,
+      userSponsoredDriversId?: string | null,
+      driverProfileUserId?: string | null,
     } | null,
     purchases?:  {
       __typename: "ModelPurchaseConnection",
       nextToken?: string | null,
     } | null,
+    adminProfile?:  {
+      __typename: "AdminProfile",
+      id: string,
+      contactEmail: string,
+      createdAt: string,
+      updatedAt: string,
+      adminProfileUserId?: string | null,
+    } | null,
+    adminReports?:  {
+      __typename: "ModelReportConnection",
+      nextToken?: string | null,
+    } | null,
+    sponsoredDrivers?:  {
+      __typename: "ModelDriverProfileConnection",
+      nextToken?: string | null,
+    } | null,
+    productCatalog?:  {
+      __typename: "ModelProductConnection",
+      nextToken?: string | null,
+    } | null,
+    pointConversionRate?: number | null,
+    sponsorReports?:  {
+      __typename: "ModelReportConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    sponsorDriversId?: string | null,
-    driverProfileId?: string | null,
+    sponsorUsersId?: string | null,
+    userDriverProfileId?: string | null,
+    userAdminProfileId?: string | null,
+  } | null,
+};
+
+export type OnUpdateUserSubscriptionVariables = {
+  filter?: ModelSubscriptionUserFilterInput | null,
+};
+
+export type OnUpdateUserSubscription = {
+  onUpdateUser?:  {
+    __typename: "User",
+    id: string,
+    username: string,
+    email: string,
+    role: UserRole,
+    sponsor?:  {
+      __typename: "Sponsor",
+      id: string,
+      name: string,
+      pointConversionRate: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    points?: number | null,
+    pointHistory?:  {
+      __typename: "ModelPointHistoryConnection",
+      nextToken?: string | null,
+    } | null,
+    driverProfile?:  {
+      __typename: "DriverProfile",
+      id: string,
+      contactEmail: string,
+      applicationStatus: string,
+      createdAt: string,
+      updatedAt: string,
+      userSponsoredDriversId?: string | null,
+      driverProfileUserId?: string | null,
+    } | null,
+    purchases?:  {
+      __typename: "ModelPurchaseConnection",
+      nextToken?: string | null,
+    } | null,
+    adminProfile?:  {
+      __typename: "AdminProfile",
+      id: string,
+      contactEmail: string,
+      createdAt: string,
+      updatedAt: string,
+      adminProfileUserId?: string | null,
+    } | null,
+    adminReports?:  {
+      __typename: "ModelReportConnection",
+      nextToken?: string | null,
+    } | null,
+    sponsoredDrivers?:  {
+      __typename: "ModelDriverProfileConnection",
+      nextToken?: string | null,
+    } | null,
+    productCatalog?:  {
+      __typename: "ModelProductConnection",
+      nextToken?: string | null,
+    } | null,
+    pointConversionRate?: number | null,
+    sponsorReports?:  {
+      __typename: "ModelReportConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    sponsorUsersId?: string | null,
+    userDriverProfileId?: string | null,
+    userAdminProfileId?: string | null,
+  } | null,
+};
+
+export type OnDeleteUserSubscriptionVariables = {
+  filter?: ModelSubscriptionUserFilterInput | null,
+};
+
+export type OnDeleteUserSubscription = {
+  onDeleteUser?:  {
+    __typename: "User",
+    id: string,
+    username: string,
+    email: string,
+    role: UserRole,
+    sponsor?:  {
+      __typename: "Sponsor",
+      id: string,
+      name: string,
+      pointConversionRate: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    points?: number | null,
+    pointHistory?:  {
+      __typename: "ModelPointHistoryConnection",
+      nextToken?: string | null,
+    } | null,
+    driverProfile?:  {
+      __typename: "DriverProfile",
+      id: string,
+      contactEmail: string,
+      applicationStatus: string,
+      createdAt: string,
+      updatedAt: string,
+      userSponsoredDriversId?: string | null,
+      driverProfileUserId?: string | null,
+    } | null,
+    purchases?:  {
+      __typename: "ModelPurchaseConnection",
+      nextToken?: string | null,
+    } | null,
+    adminProfile?:  {
+      __typename: "AdminProfile",
+      id: string,
+      contactEmail: string,
+      createdAt: string,
+      updatedAt: string,
+      adminProfileUserId?: string | null,
+    } | null,
+    adminReports?:  {
+      __typename: "ModelReportConnection",
+      nextToken?: string | null,
+    } | null,
+    sponsoredDrivers?:  {
+      __typename: "ModelDriverProfileConnection",
+      nextToken?: string | null,
+    } | null,
+    productCatalog?:  {
+      __typename: "ModelProductConnection",
+      nextToken?: string | null,
+    } | null,
+    pointConversionRate?: number | null,
+    sponsorReports?:  {
+      __typename: "ModelReportConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    sponsorUsersId?: string | null,
+    userDriverProfileId?: string | null,
+    userAdminProfileId?: string | null,
   } | null,
 };
 
@@ -2567,13 +3320,9 @@ export type OnCreateSponsorSubscription = {
       __typename: "ModelProductConnection",
       nextToken?: string | null,
     } | null,
-    drivers?:  {
-      __typename: "ModelDriverConnection",
-      nextToken?: string | null,
-    } | null,
     pointConversionRate: number,
-    sponsorUsers?:  {
-      __typename: "ModelSponsorUserConnection",
+    users?:  {
+      __typename: "ModelUserConnection",
       nextToken?: string | null,
     } | null,
     reports?:  {
@@ -2598,13 +3347,9 @@ export type OnUpdateSponsorSubscription = {
       __typename: "ModelProductConnection",
       nextToken?: string | null,
     } | null,
-    drivers?:  {
-      __typename: "ModelDriverConnection",
-      nextToken?: string | null,
-    } | null,
     pointConversionRate: number,
-    sponsorUsers?:  {
-      __typename: "ModelSponsorUserConnection",
+    users?:  {
+      __typename: "ModelUserConnection",
       nextToken?: string | null,
     } | null,
     reports?:  {
@@ -2629,13 +3374,9 @@ export type OnDeleteSponsorSubscription = {
       __typename: "ModelProductConnection",
       nextToken?: string | null,
     } | null,
-    drivers?:  {
-      __typename: "ModelDriverConnection",
-      nextToken?: string | null,
-    } | null,
     pointConversionRate: number,
-    sponsorUsers?:  {
-      __typename: "ModelSponsorUserConnection",
+    users?:  {
+      __typename: "ModelUserConnection",
       nextToken?: string | null,
     } | null,
     reports?:  {
@@ -2644,78 +3385,6 @@ export type OnDeleteSponsorSubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
-  } | null,
-};
-
-export type OnCreateSponsorUserSubscriptionVariables = {
-  filter?: ModelSubscriptionSponsorUserFilterInput | null,
-};
-
-export type OnCreateSponsorUserSubscription = {
-  onCreateSponsorUser?:  {
-    __typename: "SponsorUser",
-    id: string,
-    username: string,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    role: string,
-    createdAt: string,
-    updatedAt: string,
-    sponsorSponsorUsersId?: string | null,
-  } | null,
-};
-
-export type OnUpdateSponsorUserSubscriptionVariables = {
-  filter?: ModelSubscriptionSponsorUserFilterInput | null,
-};
-
-export type OnUpdateSponsorUserSubscription = {
-  onUpdateSponsorUser?:  {
-    __typename: "SponsorUser",
-    id: string,
-    username: string,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    role: string,
-    createdAt: string,
-    updatedAt: string,
-    sponsorSponsorUsersId?: string | null,
-  } | null,
-};
-
-export type OnDeleteSponsorUserSubscriptionVariables = {
-  filter?: ModelSubscriptionSponsorUserFilterInput | null,
-};
-
-export type OnDeleteSponsorUserSubscription = {
-  onDeleteSponsorUser?:  {
-    __typename: "SponsorUser",
-    id: string,
-    username: string,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    role: string,
-    createdAt: string,
-    updatedAt: string,
-    sponsorSponsorUsersId?: string | null,
   } | null,
 };
 
@@ -2731,16 +3400,13 @@ export type OnCreateProductSubscription = {
     description: string,
     price: number,
     pointsValue: number,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
+    purchases?:  {
+      __typename: "ModelPurchaseConnection",
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    userProductCatalogId?: string | null,
     sponsorProductCatalogId?: string | null,
   } | null,
 };
@@ -2757,16 +3423,13 @@ export type OnUpdateProductSubscription = {
     description: string,
     price: number,
     pointsValue: number,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
+    purchases?:  {
+      __typename: "ModelPurchaseConnection",
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    userProductCatalogId?: string | null,
     sponsorProductCatalogId?: string | null,
   } | null,
 };
@@ -2783,16 +3446,13 @@ export type OnDeleteProductSubscription = {
     description: string,
     price: number,
     pointsValue: number,
-    sponsor?:  {
-      __typename: "Sponsor",
-      id: string,
-      name: string,
-      pointConversionRate: number,
-      createdAt: string,
-      updatedAt: string,
+    purchases?:  {
+      __typename: "ModelPurchaseConnection",
+      nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
+    userProductCatalogId?: string | null,
     sponsorProductCatalogId?: string | null,
   } | null,
 };
@@ -2805,21 +3465,39 @@ export type OnCreatePurchaseSubscription = {
   onCreatePurchase?:  {
     __typename: "Purchase",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
+    product?:  {
+      __typename: "Product",
+      id: string,
+      name: string,
+      description: string,
+      price: number,
+      pointsValue: number,
+      createdAt: string,
+      updatedAt: string,
+      userProductCatalogId?: string | null,
+      sponsorProductCatalogId?: string | null,
+    } | null,
+    productID: string,
     status: string,
     purchaseDate: string,
     createdAt: string,
     updatedAt: string,
-    driverPurchasesId?: string | null,
+    userPurchasesId?: string | null,
+    productPurchasesId?: string | null,
   } | null,
 };
 
@@ -2831,21 +3509,39 @@ export type OnUpdatePurchaseSubscription = {
   onUpdatePurchase?:  {
     __typename: "Purchase",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
+    product?:  {
+      __typename: "Product",
+      id: string,
+      name: string,
+      description: string,
+      price: number,
+      pointsValue: number,
+      createdAt: string,
+      updatedAt: string,
+      userProductCatalogId?: string | null,
+      sponsorProductCatalogId?: string | null,
+    } | null,
+    productID: string,
     status: string,
     purchaseDate: string,
     createdAt: string,
     updatedAt: string,
-    driverPurchasesId?: string | null,
+    userPurchasesId?: string | null,
+    productPurchasesId?: string | null,
   } | null,
 };
 
@@ -2857,21 +3553,39 @@ export type OnDeletePurchaseSubscription = {
   onDeletePurchase?:  {
     __typename: "Purchase",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
+    product?:  {
+      __typename: "Product",
+      id: string,
+      name: string,
+      description: string,
+      price: number,
+      pointsValue: number,
+      createdAt: string,
+      updatedAt: string,
+      userProductCatalogId?: string | null,
+      sponsorProductCatalogId?: string | null,
+    } | null,
+    productID: string,
     status: string,
     purchaseDate: string,
     createdAt: string,
     updatedAt: string,
-    driverPurchasesId?: string | null,
+    userPurchasesId?: string | null,
+    productPurchasesId?: string | null,
   } | null,
 };
 
@@ -2883,22 +3597,26 @@ export type OnCreatePointHistorySubscription = {
   onCreatePointHistory?:  {
     __typename: "PointHistory",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     date: string,
     pointsChange: number,
     reason: string,
     createdAt: string,
     updatedAt: string,
-    driverPointHistoryId?: string | null,
+    userPointHistoryId?: string | null,
   } | null,
 };
 
@@ -2910,22 +3628,26 @@ export type OnUpdatePointHistorySubscription = {
   onUpdatePointHistory?:  {
     __typename: "PointHistory",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     date: string,
     pointsChange: number,
     reason: string,
     createdAt: string,
     updatedAt: string,
-    driverPointHistoryId?: string | null,
+    userPointHistoryId?: string | null,
   } | null,
 };
 
@@ -2937,103 +3659,26 @@ export type OnDeletePointHistorySubscription = {
   onDeletePointHistory?:  {
     __typename: "PointHistory",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     date: string,
     pointsChange: number,
     reason: string,
     createdAt: string,
     updatedAt: string,
-    driverPointHistoryId?: string | null,
-  } | null,
-};
-
-export type OnCreateAdministratorSubscriptionVariables = {
-  filter?: ModelSubscriptionAdministratorFilterInput | null,
-};
-
-export type OnCreateAdministratorSubscription = {
-  onCreateAdministrator?:  {
-    __typename: "Administrator",
-    id: string,
-    username: string,
-    profile?:  {
-      __typename: "AdminProfile",
-      id: string,
-      contactEmail: string,
-      createdAt: string,
-      updatedAt: string,
-      adminProfileAdministratorId?: string | null,
-    } | null,
-    reports?:  {
-      __typename: "ModelReportConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    administratorProfileId?: string | null,
-  } | null,
-};
-
-export type OnUpdateAdministratorSubscriptionVariables = {
-  filter?: ModelSubscriptionAdministratorFilterInput | null,
-};
-
-export type OnUpdateAdministratorSubscription = {
-  onUpdateAdministrator?:  {
-    __typename: "Administrator",
-    id: string,
-    username: string,
-    profile?:  {
-      __typename: "AdminProfile",
-      id: string,
-      contactEmail: string,
-      createdAt: string,
-      updatedAt: string,
-      adminProfileAdministratorId?: string | null,
-    } | null,
-    reports?:  {
-      __typename: "ModelReportConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    administratorProfileId?: string | null,
-  } | null,
-};
-
-export type OnDeleteAdministratorSubscriptionVariables = {
-  filter?: ModelSubscriptionAdministratorFilterInput | null,
-};
-
-export type OnDeleteAdministratorSubscription = {
-  onDeleteAdministrator?:  {
-    __typename: "Administrator",
-    id: string,
-    username: string,
-    profile?:  {
-      __typename: "AdminProfile",
-      id: string,
-      contactEmail: string,
-      createdAt: string,
-      updatedAt: string,
-      adminProfileAdministratorId?: string | null,
-    } | null,
-    reports?:  {
-      __typename: "ModelReportConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    administratorProfileId?: string | null,
+    userPointHistoryId?: string | null,
   } | null,
 };
 
@@ -3045,18 +3690,24 @@ export type OnCreateAdminProfileSubscription = {
   onCreateAdminProfile?:  {
     __typename: "AdminProfile",
     id: string,
-    administrator?:  {
-      __typename: "Administrator",
+    user?:  {
+      __typename: "User",
       id: string,
       username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      administratorProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     contactEmail: string,
     createdAt: string,
     updatedAt: string,
-    adminProfileAdministratorId?: string | null,
+    adminProfileUserId?: string | null,
   } | null,
 };
 
@@ -3068,18 +3719,24 @@ export type OnUpdateAdminProfileSubscription = {
   onUpdateAdminProfile?:  {
     __typename: "AdminProfile",
     id: string,
-    administrator?:  {
-      __typename: "Administrator",
+    user?:  {
+      __typename: "User",
       id: string,
       username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      administratorProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     contactEmail: string,
     createdAt: string,
     updatedAt: string,
-    adminProfileAdministratorId?: string | null,
+    adminProfileUserId?: string | null,
   } | null,
 };
 
@@ -3091,18 +3748,24 @@ export type OnDeleteAdminProfileSubscription = {
   onDeleteAdminProfile?:  {
     __typename: "AdminProfile",
     id: string,
-    administrator?:  {
-      __typename: "Administrator",
+    user?:  {
+      __typename: "User",
       id: string,
       username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      administratorProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     contactEmail: string,
     createdAt: string,
     updatedAt: string,
-    adminProfileAdministratorId?: string | null,
+    adminProfileUserId?: string | null,
   } | null,
 };
 
@@ -3114,21 +3777,26 @@ export type OnCreateDriverProfileSubscription = {
   onCreateDriverProfile?:  {
     __typename: "DriverProfile",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     contactEmail: string,
     applicationStatus: string,
     createdAt: string,
     updatedAt: string,
-    driverProfileDriverId?: string | null,
+    userSponsoredDriversId?: string | null,
+    driverProfileUserId?: string | null,
   } | null,
 };
 
@@ -3140,21 +3808,26 @@ export type OnUpdateDriverProfileSubscription = {
   onUpdateDriverProfile?:  {
     __typename: "DriverProfile",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     contactEmail: string,
     applicationStatus: string,
     createdAt: string,
     updatedAt: string,
-    driverProfileDriverId?: string | null,
+    userSponsoredDriversId?: string | null,
+    driverProfileUserId?: string | null,
   } | null,
 };
 
@@ -3166,21 +3839,26 @@ export type OnDeleteDriverProfileSubscription = {
   onDeleteDriverProfile?:  {
     __typename: "DriverProfile",
     id: string,
-    driver?:  {
-      __typename: "Driver",
+    user?:  {
+      __typename: "User",
       id: string,
-      name: string,
-      points: number,
+      username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      sponsorDriversId?: string | null,
-      driverProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     contactEmail: string,
     applicationStatus: string,
     createdAt: string,
     updatedAt: string,
-    driverProfileDriverId?: string | null,
+    userSponsoredDriversId?: string | null,
+    driverProfileUserId?: string | null,
   } | null,
 };
 
@@ -3194,12 +3872,18 @@ export type OnCreateReportSubscription = {
     id: string,
     type: string,
     generatedBy?:  {
-      __typename: "Administrator",
+      __typename: "User",
       id: string,
       username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      administratorProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     sponsor?:  {
       __typename: "Sponsor",
@@ -3214,8 +3898,9 @@ export type OnCreateReportSubscription = {
     reportData: string,
     createdAt: string,
     updatedAt: string,
+    userAdminReportsId?: string | null,
+    userSponsorReportsId?: string | null,
     sponsorReportsId?: string | null,
-    administratorReportsId?: string | null,
   } | null,
 };
 
@@ -3229,12 +3914,18 @@ export type OnUpdateReportSubscription = {
     id: string,
     type: string,
     generatedBy?:  {
-      __typename: "Administrator",
+      __typename: "User",
       id: string,
       username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      administratorProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     sponsor?:  {
       __typename: "Sponsor",
@@ -3249,8 +3940,9 @@ export type OnUpdateReportSubscription = {
     reportData: string,
     createdAt: string,
     updatedAt: string,
+    userAdminReportsId?: string | null,
+    userSponsorReportsId?: string | null,
     sponsorReportsId?: string | null,
-    administratorReportsId?: string | null,
   } | null,
 };
 
@@ -3264,12 +3956,18 @@ export type OnDeleteReportSubscription = {
     id: string,
     type: string,
     generatedBy?:  {
-      __typename: "Administrator",
+      __typename: "User",
       id: string,
       username: string,
+      email: string,
+      role: UserRole,
+      points?: number | null,
+      pointConversionRate?: number | null,
       createdAt: string,
       updatedAt: string,
-      administratorProfileId?: string | null,
+      sponsorUsersId?: string | null,
+      userDriverProfileId?: string | null,
+      userAdminProfileId?: string | null,
     } | null,
     sponsor?:  {
       __typename: "Sponsor",
@@ -3284,8 +3982,9 @@ export type OnDeleteReportSubscription = {
     reportData: string,
     createdAt: string,
     updatedAt: string,
+    userAdminReportsId?: string | null,
+    userSponsorReportsId?: string | null,
     sponsorReportsId?: string | null,
-    administratorReportsId?: string | null,
   } | null,
 };
 

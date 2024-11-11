@@ -14,14 +14,11 @@
     "categories": {
       "auth": {
         "team03rebuild": {
-          "nativeClientId": "48jmdql83vacocmn8shr4n5odf",
-          "userPoolId": "us-east-1_zuWPPSmp4",
-          "userPoolName": "Team03-UserPool",
-          "webClientId": "48jmdql83vacocmn8shr4n5odf"
+          "nativeClientId": "4uslrmlurtmufb4l7bdgs5or6e",
+          "userPoolId": "us-east-1_30MDJhjDj",
+          "userPoolName": "Team03-UserPool-New",
+          "webClientId": "4uslrmlurtmufb4l7bdgs5or6e"
         }
-      },
-      "api": {
-        "team03rebuild": {}
       }
     }
   }

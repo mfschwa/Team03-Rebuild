@@ -8,10 +8,129 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const getDriver = /* GraphQL */ `query GetDriver($id: ID!) {
-  getDriver(id: $id) {
+export const getBlog = /* GraphQL */ `query GetBlog($id: ID!) {
+  getBlog(id: $id) {
     id
     name
+    posts {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.GetBlogQueryVariables, APITypes.GetBlogQuery>;
+export const listBlogs = /* GraphQL */ `query ListBlogs(
+  $filter: ModelBlogFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listBlogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.ListBlogsQueryVariables, APITypes.ListBlogsQuery>;
+export const getPost = /* GraphQL */ `query GetPost($id: ID!) {
+  getPost(id: $id) {
+    id
+    title
+    blog {
+      id
+      name
+      createdAt
+      updatedAt
+      __typename
+    }
+    comments {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    blogPostsId
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.GetPostQueryVariables, APITypes.GetPostQuery>;
+export const listPosts = /* GraphQL */ `query ListPosts(
+  $filter: ModelPostFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      createdAt
+      updatedAt
+      blogPostsId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.ListPostsQueryVariables, APITypes.ListPostsQuery>;
+export const getComment = /* GraphQL */ `query GetComment($id: ID!) {
+  getComment(id: $id) {
+    id
+    post {
+      id
+      title
+      createdAt
+      updatedAt
+      blogPostsId
+      __typename
+    }
+    content
+    createdAt
+    updatedAt
+    postCommentsId
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetCommentQueryVariables,
+  APITypes.GetCommentQuery
+>;
+export const listComments = /* GraphQL */ `query ListComments(
+  $filter: ModelCommentFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      content
+      createdAt
+      updatedAt
+      postCommentsId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListCommentsQueryVariables,
+  APITypes.ListCommentsQuery
+>;
+export const getUser = /* GraphQL */ `query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    username
+    email
+    role
     sponsor {
       id
       name
@@ -25,51 +144,79 @@ export const getDriver = /* GraphQL */ `query GetDriver($id: ID!) {
       nextToken
       __typename
     }
-    profile {
+    driverProfile {
       id
       contactEmail
       applicationStatus
       createdAt
       updatedAt
-      driverProfileDriverId
+      userSponsoredDriversId
+      driverProfileUserId
       __typename
     }
     purchases {
       nextToken
       __typename
     }
+    adminProfile {
+      id
+      contactEmail
+      createdAt
+      updatedAt
+      adminProfileUserId
+      __typename
+    }
+    adminReports {
+      nextToken
+      __typename
+    }
+    sponsoredDrivers {
+      nextToken
+      __typename
+    }
+    productCatalog {
+      nextToken
+      __typename
+    }
+    pointConversionRate
+    sponsorReports {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
-    sponsorDriversId
-    driverProfileId
+    sponsorUsersId
+    userDriverProfileId
+    userAdminProfileId
     __typename
   }
 }
-` as GeneratedQuery<APITypes.GetDriverQueryVariables, APITypes.GetDriverQuery>;
-export const listDrivers = /* GraphQL */ `query ListDrivers(
-  $filter: ModelDriverFilterInput
+` as GeneratedQuery<APITypes.GetUserQueryVariables, APITypes.GetUserQuery>;
+export const listUsers = /* GraphQL */ `query ListUsers(
+  $filter: ModelUserFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listDrivers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     nextToken
     __typename
   }
 }
-` as GeneratedQuery<
-  APITypes.ListDriversQueryVariables,
-  APITypes.ListDriversQuery
->;
+` as GeneratedQuery<APITypes.ListUsersQueryVariables, APITypes.ListUsersQuery>;
 export const getSponsor = /* GraphQL */ `query GetSponsor($id: ID!) {
   getSponsor(id: $id) {
     id
@@ -78,12 +225,8 @@ export const getSponsor = /* GraphQL */ `query GetSponsor($id: ID!) {
       nextToken
       __typename
     }
-    drivers {
-      nextToken
-      __typename
-    }
     pointConversionRate
-    sponsorUsers {
+    users {
       nextToken
       __typename
     }
@@ -122,52 +265,6 @@ export const listSponsors = /* GraphQL */ `query ListSponsors(
   APITypes.ListSponsorsQueryVariables,
   APITypes.ListSponsorsQuery
 >;
-export const getSponsorUser = /* GraphQL */ `query GetSponsorUser($id: ID!) {
-  getSponsorUser(id: $id) {
-    id
-    username
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
-      __typename
-    }
-    role
-    createdAt
-    updatedAt
-    sponsorSponsorUsersId
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.GetSponsorUserQueryVariables,
-  APITypes.GetSponsorUserQuery
->;
-export const listSponsorUsers = /* GraphQL */ `query ListSponsorUsers(
-  $filter: ModelSponsorUserFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listSponsorUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      username
-      role
-      createdAt
-      updatedAt
-      sponsorSponsorUsersId
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ListSponsorUsersQueryVariables,
-  APITypes.ListSponsorUsersQuery
->;
 export const getProduct = /* GraphQL */ `query GetProduct($id: ID!) {
   getProduct(id: $id) {
     id
@@ -175,16 +272,13 @@ export const getProduct = /* GraphQL */ `query GetProduct($id: ID!) {
     description
     price
     pointsValue
-    sponsor {
-      id
-      name
-      pointConversionRate
-      createdAt
-      updatedAt
+    purchases {
+      nextToken
       __typename
     }
     createdAt
     updatedAt
+    userProductCatalogId
     sponsorProductCatalogId
     __typename
   }
@@ -207,6 +301,7 @@ export const listProducts = /* GraphQL */ `query ListProducts(
       pointsValue
       createdAt
       updatedAt
+      userProductCatalogId
       sponsorProductCatalogId
       __typename
     }
@@ -221,21 +316,39 @@ export const listProducts = /* GraphQL */ `query ListProducts(
 export const getPurchase = /* GraphQL */ `query GetPurchase($id: ID!) {
   getPurchase(id: $id) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
+    product {
+      id
+      name
+      description
+      price
+      pointsValue
+      createdAt
+      updatedAt
+      userProductCatalogId
+      sponsorProductCatalogId
+      __typename
+    }
+    productID
     status
     purchaseDate
     createdAt
     updatedAt
-    driverPurchasesId
+    userPurchasesId
+    productPurchasesId
     __typename
   }
 }
@@ -251,11 +364,13 @@ export const listPurchases = /* GraphQL */ `query ListPurchases(
   listPurchases(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      productID
       status
       purchaseDate
       createdAt
       updatedAt
-      driverPurchasesId
+      userPurchasesId
+      productPurchasesId
       __typename
     }
     nextToken
@@ -269,14 +384,18 @@ export const listPurchases = /* GraphQL */ `query ListPurchases(
 export const getPointHistory = /* GraphQL */ `query GetPointHistory($id: ID!) {
   getPointHistory(id: $id) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     date
@@ -284,7 +403,7 @@ export const getPointHistory = /* GraphQL */ `query GetPointHistory($id: ID!) {
     reason
     createdAt
     updatedAt
-    driverPointHistoryId
+    userPointHistoryId
     __typename
   }
 }
@@ -305,7 +424,7 @@ export const listPointHistories = /* GraphQL */ `query ListPointHistories(
       reason
       createdAt
       updatedAt
-      driverPointHistoryId
+      userPointHistoryId
       __typename
     }
     nextToken
@@ -316,69 +435,27 @@ export const listPointHistories = /* GraphQL */ `query ListPointHistories(
   APITypes.ListPointHistoriesQueryVariables,
   APITypes.ListPointHistoriesQuery
 >;
-export const getAdministrator = /* GraphQL */ `query GetAdministrator($id: ID!) {
-  getAdministrator(id: $id) {
-    id
-    username
-    profile {
-      id
-      contactEmail
-      createdAt
-      updatedAt
-      adminProfileAdministratorId
-      __typename
-    }
-    reports {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    administratorProfileId
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.GetAdministratorQueryVariables,
-  APITypes.GetAdministratorQuery
->;
-export const listAdministrators = /* GraphQL */ `query ListAdministrators(
-  $filter: ModelAdministratorFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listAdministrators(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      username
-      createdAt
-      updatedAt
-      administratorProfileId
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ListAdministratorsQueryVariables,
-  APITypes.ListAdministratorsQuery
->;
 export const getAdminProfile = /* GraphQL */ `query GetAdminProfile($id: ID!) {
   getAdminProfile(id: $id) {
     id
-    administrator {
+    user {
       id
       username
+      email
+      role
+      points
+      pointConversionRate
       createdAt
       updatedAt
-      administratorProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     contactEmail
     createdAt
     updatedAt
-    adminProfileAdministratorId
+    adminProfileUserId
     __typename
   }
 }
@@ -397,7 +474,7 @@ export const listAdminProfiles = /* GraphQL */ `query ListAdminProfiles(
       contactEmail
       createdAt
       updatedAt
-      adminProfileAdministratorId
+      adminProfileUserId
       __typename
     }
     nextToken
@@ -411,21 +488,26 @@ export const listAdminProfiles = /* GraphQL */ `query ListAdminProfiles(
 export const getDriverProfile = /* GraphQL */ `query GetDriverProfile($id: ID!) {
   getDriverProfile(id: $id) {
     id
-    driver {
+    user {
       id
-      name
+      username
+      email
+      role
       points
+      pointConversionRate
       createdAt
       updatedAt
-      sponsorDriversId
-      driverProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     contactEmail
     applicationStatus
     createdAt
     updatedAt
-    driverProfileDriverId
+    userSponsoredDriversId
+    driverProfileUserId
     __typename
   }
 }
@@ -445,7 +527,8 @@ export const listDriverProfiles = /* GraphQL */ `query ListDriverProfiles(
       applicationStatus
       createdAt
       updatedAt
-      driverProfileDriverId
+      userSponsoredDriversId
+      driverProfileUserId
       __typename
     }
     nextToken
@@ -463,9 +546,15 @@ export const getReport = /* GraphQL */ `query GetReport($id: ID!) {
     generatedBy {
       id
       username
+      email
+      role
+      points
+      pointConversionRate
       createdAt
       updatedAt
-      administratorProfileId
+      sponsorUsersId
+      userDriverProfileId
+      userAdminProfileId
       __typename
     }
     sponsor {
@@ -481,8 +570,9 @@ export const getReport = /* GraphQL */ `query GetReport($id: ID!) {
     reportData
     createdAt
     updatedAt
+    userAdminReportsId
+    userSponsorReportsId
     sponsorReportsId
-    administratorReportsId
     __typename
   }
 }
@@ -501,8 +591,9 @@ export const listReports = /* GraphQL */ `query ListReports(
       reportData
       createdAt
       updatedAt
+      userAdminReportsId
+      userSponsorReportsId
       sponsorReportsId
-      administratorReportsId
       __typename
     }
     nextToken

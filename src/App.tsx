@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { getCurrentUser, fetchAuthSession } from 'aws-amplify/auth';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import NavBar from "./ui-components/NavBar";
+import Profile from "./pages/Profile";
+import AboutPage from "./pages/AboutPage";
 
 type UserRole = "admin" | "driver" | "sponsor" | "guest";
 
+
 function App() {
-  const { user, signOut } = useAuthenticator();
+  const { user } = useAuthenticator();
+  const [initialNavigationDone, setInitialNavigationDone] = useState(false);
   const [role, setRole] = useState<UserRole | null>(null);
   const navigate = useNavigate();
 
@@ -20,9 +26,9 @@ function App() {
         const groups = (session.tokens?.accessToken?.payload['cognito:groups'] as string[]) || [];
         
         // Check group membership and set role accordingly
-        if (groups.includes("admin")) setRole("admin");
-        else if (groups.includes("driver")) setRole("driver");
-        else if (groups.includes("sponsor")) setRole("sponsor");
+        if (groups.includes("Admin")) setRole("admin");
+        else if (groups.includes("Driver")) setRole("driver");
+        else if (groups.includes("Sponsor")) setRole("sponsor");
         else setRole("guest");
 
       } catch (error) {
@@ -35,8 +41,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // Redirect based on role
-    if (role) {
+    if (!initialNavigationDone) {
       if (role === "admin") {
         navigate("/admin-dashboard");
       } else if (role === "driver") {
@@ -46,39 +51,35 @@ function App() {
       } else {
         navigate("/unauthorized");
       }
+
+      // Set the flag to prevent re-navigation
+      setInitialNavigationDone(true);
     }
-  }, [role, navigate]);
+  }, [role, navigate, initialNavigationDone]);
 
   return (
-    <main>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
-        <div>
-          {role === "driver" ? (
-            <h1>Welcome, Driver {user?.signInDetails?.loginId}</h1>
-          ) : role === "admin" ? (
-            <h1>Welcome, Admin {user?.signInDetails?.loginId}</h1>
-          ) : role === "sponsor" ? (
-            <h1>Welcome, Sponsor {user?.signInDetails?.loginId}</h1>
-          ) : (
-            <h1>Unauthorized</h1>
-          )}
+    <>
+      <NavBar />
+      <main>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
+          <div>
+            {role === "driver" ? (
+              <h1>Welcome, Driver {user?.signInDetails?.loginId}</h1>
+            ) : role === "admin" ? (
+              <h1>Welcome, Admin {user?.signInDetails?.loginId}</h1>
+            ) : role === "sponsor" ? (
+              <h1>Welcome, Sponsor {user?.signInDetails?.loginId}</h1>
+            ) : (
+              <h1>Unauthorized</h1>
+            )}
+          </div>
         </div>
-        <button 
-          onClick={signOut}
-          style={{
-            padding: '0.5rem 1rem',
-            backgroundColor: '#ff0000',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontSize: '1rem'
-          }}
-        >
-          Sign Out
-        </button>
-      </div>
-    </main>
+        <Routes>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/about" element={<AboutPage />} />
+        </Routes>
+      </main>
+    </>
   );
 }
 
