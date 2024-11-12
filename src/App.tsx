@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import NavBar from "./ui/NavBar";
 import Profile from "./pages/Profile";
 import AboutPage from "./pages/AboutPage";
+import Catalog from "./pages/Catalog";
 
 type UserRole = "admin" | "driver" | "sponsor" | "guest";
 
@@ -77,6 +78,7 @@ function App() {
         <Routes>
           <Route path="/profile" element={<Profile />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/catalog" element={<Catalog />} />
         </Routes>
       </main>
     </>

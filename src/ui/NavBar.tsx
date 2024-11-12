@@ -80,6 +80,9 @@ function NavBar() {
         <li style={{ marginRight: '1rem' }}>
           <button onClick={handleDashboardClick} style={buttonStyle}>Dashboard</button>
         </li>
+        <li style={{ marginRight: '1rem' }}>
+          <Link to="/catalog" style={buttonStyle}>Catalog</Link>
+        </li>
       </ul>
       <button 
         onClick={signOut}
