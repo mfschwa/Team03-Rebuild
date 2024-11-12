@@ -3,7 +3,7 @@ import { useAuthenticator } from '@aws-amplify/ui-react';
 import { getCurrentUser, fetchAuthSession } from 'aws-amplify/auth';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import NavBar from "./ui-components/NavBar";
+import NavBar from "./ui/NavBar";
 import Profile from "./pages/Profile";
 import AboutPage from "./pages/AboutPage";
 
