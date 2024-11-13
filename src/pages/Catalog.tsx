@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import { DataStore } from '@aws-amplify/datastore';
-import { CartItem } from '../models/CartItem';
+import { CartItem } from '../models';
 
 const Catalog = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<any[]>([]);
   const [mediaType, setMediaType] = useState('all');
   const [explicit, setExplicit] = useState(false);
-  const [cart, setCart] = useState<any[]>([]);
+  const [cart, setCart] = useState<CartItem[]>([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const loadCart = async () => {
+      const cartItems = await DataStore.query(CartItem);
+      setCart(cartItems);
+    };
+    loadCart();
+
+    const subscription = DataStore.observe(CartItem).subscribe(() => loadCart());
+    return () => subscription.unsubscribe();
+  }, []);
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,15 +31,19 @@ const Catalog = () => {
     const mediaQuery = mediaType !== 'all' ? `&media=${mediaType}` : '';
     const explicitQuery = explicit ? '' : '&explicit=no';
 
-    const response = await fetch(
-      `https://itunes.apple.com/search?term=${formattedQuery}${mediaQuery}${explicitQuery}&limit=50`
-    );
+    try {
+      const response = await fetch(
+        `https://itunes.apple.com/search?term=${formattedQuery}${mediaQuery}${explicitQuery}&limit=50`
+      );
 
-    if (response.ok) {
-      const data = await response.json();
-      setResults(data.results);
-    } else {
-      console.error('Error fetching data from iTunes API');
+      if (response.ok) {
+        const data = await response.json();
+        setResults(data.results);
+      } else {
+        console.error('Error fetching data from iTunes API');
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
     }
   };
 
@@ -36,19 +51,21 @@ const Catalog = () => {
     const isItemInCart = cart.some(cartItem => cartItem.trackId === item.trackId);
 
     if (isItemInCart) {
-      await DataStore.delete(CartItem, c => c.trackId('eq', item.trackId));
-      setCart(cart.filter(cartItem => cartItem.trackId !== item.trackId));
+      const itemToDelete = cart.find(cartItem => cartItem.trackId === item.trackId);
+      if (itemToDelete) {
+        await DataStore.delete(CartItem, c => c.trackId('eq', item.trackId));
+        setCart(cart.filter(cartItem => cartItem.trackId !== item.trackId));
+      }
     } else {
-      await DataStore.save(
-        new CartItem({
-          trackId: item.trackId,
-          name: item.trackName || item.collectionName,
-          artist: item.artistName,
-          price: item.collectionPrice,
-          imageUrl: item.artworkUrl100
-        })
-      );
-      setCart([...cart, item]);
+      const newCartItem = new CartItem({
+        trackId: item.trackId,
+        name: item.trackName || item.collectionName,
+        artist: item.artistName,
+        price: item.collectionPrice,
+        imageUrl: item.artworkUrl100,
+      });
+      await DataStore.save(newCartItem);
+      setCart([...cart, newCartItem]);
     }
   };
 

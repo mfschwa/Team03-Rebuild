@@ -3,7 +3,7 @@ import { DataStore } from '@aws-amplify/datastore';
 import { CartItem } from './models';
 
 const Checkout = () => {
-  const [cart, setCart] = useState<any[]>([]);
+  const [cart, setCart] = useState<CartItem[]>([]);
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -12,6 +12,10 @@ const Checkout = () => {
     };
 
     fetchCartItems();
+
+    const subscription = DataStore.observe(CartItem).subscribe(() => fetchCartItems());
+
+    return () => subscription.unsubscribe();
   }, []);
 
   return (
@@ -21,11 +25,11 @@ const Checkout = () => {
         <p>Your cart is empty.</p>
       ) : (
         <ul>
-          {cart.map((item: any) => (
+          {cart.map((item) => (
             <li key={item.id}>
               <h3>{item.name}</h3>
               <p>{item.artist}</p>
-              <p>Price: ${item.price}</p>
+              <p>Price: ${item.price.toFixed(2)}</p> {/* Ensure price is displayed with two decimal places */}
               <img src={item.imageUrl} alt={item.name} />
             </li>
           ))}
