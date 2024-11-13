@@ -24,5 +24,31 @@
         "team03rebuild": {}
       }
     }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-team03rebuild-dev-10fa6-authRole",
+      "UnauthRoleArn": "arn:aws:iam::274815321855:role/amplify-team03rebuild-dev-10fa6-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::274815321855:role/amplify-team03rebuild-dev-10fa6-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-team03rebuild-dev-10fa6-deployment",
+      "UnauthRoleName": "amplify-team03rebuild-dev-10fa6-unauthRole",
+      "StackName": "amplify-team03rebuild-dev-10fa6",
+      "StackId": "arn:aws:cloudformation:us-east-1:274815321855:stack/amplify-team03rebuild-dev-10fa6/8b825e50-a1c9-11ef-a0de-0affe0741fd3",
+      "AmplifyAppId": "d14aawrdxcrl4t"
+    },
+    "categories": {
+      "auth": {
+        "team03rebuild": {
+          "userPoolId": "us-east-1_30MDJhjDj",
+          "userPoolName": "Team03-UserPool-New",
+          "webClientId": "4uslrmlurtmufb4l7bdgs5or6e",
+          "nativeClientId": "4uslrmlurtmufb4l7bdgs5or6e"
+        }
+      },
+      "api": {
+        "team03rebuild": {}
+      }
+    }
   }
 }
