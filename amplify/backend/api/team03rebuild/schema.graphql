@@ -99,3 +99,12 @@ type AuditLog @model {
   timestamp: AWSDateTime!
   details: AWSJSON
 }
+
+type CartItem @model {
+  id: ID!
+  trackId: Int!
+  name: String!
+  artist: String
+  price: Float
+  imageUrl: String
+}
