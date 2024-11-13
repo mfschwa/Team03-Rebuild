@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DataStore } from '@aws-amplify/datastore';
-import { CartItem } from './models';
+import { CartItem } from '../models';
 
 const Checkout = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -29,7 +29,7 @@ const Checkout = () => {
             <li key={item.id}>
               <h3>{item.name}</h3>
               <p>{item.artist}</p>
-              <p>Price: ${item.price.toFixed(2)}</p> {/* Ensure price is displayed with two decimal places */}
+              <p>Price: ${item.price.toFixed(2)}</p>
               <img src={item.imageUrl} alt={item.name} />
             </li>
           ))}
