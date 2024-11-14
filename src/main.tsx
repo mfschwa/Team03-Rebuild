@@ -5,6 +5,8 @@ import { Amplify } from 'aws-amplify'
 import { Authenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
 import App from './App'
+import awsconfig from './aws-exports';
+
 
 Amplify.configure({
   Auth: {
@@ -14,6 +16,8 @@ Amplify.configure({
     }
   }
 });
+
+Amplify.configure(awsconfig);
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -25,26 +29,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             FormFields() {
               return (
                 <>
-                  <Authenticator.SignUp.FormFields />
-                  <div>
-                    <label htmlFor="email">Email</label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="Email"
-                      required={true}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="name">Full Name</label>
-                    <input
-                      id="name"
-                      name="name"
-                      placeholder="Full Name"
-                      required={true}
-                    />
-                  </div>
+                  <Authenticator.SignUp.FormFields />              
                 </>
               );
             }

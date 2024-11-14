@@ -77,6 +77,11 @@ function NavBar() {
         <li style={{ marginRight: '1rem' }}>
           <Link to="/profile" style={buttonStyle}>Profile</Link>
         </li>
+        {role === "driver" && (
+          <li style={{ marginRight: '1rem' }}>
+            <Link to="/application" style={buttonStyle}>Application</Link>
+          </li>
+        )}
         <li style={{ marginRight: '1rem' }}>
           <button onClick={handleDashboardClick} style={buttonStyle}>Dashboard</button>
         </li>
