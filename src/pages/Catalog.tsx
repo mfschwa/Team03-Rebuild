@@ -47,7 +47,7 @@ const Catalog = () => {
     }
   };
 
-  const toggleCartItem = async (item) => {
+  const toggleCartItem = async (item: any) => {
     const isItemInCart = cart.some((cartItem) => cartItem.trackId === item.trackId);
   
     if (isItemInCart) {
