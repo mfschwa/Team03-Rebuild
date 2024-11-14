@@ -33,7 +33,7 @@ const Catalog = () => {
 
     try {
       const response = await fetch(
-        `https://itunes.apple.com/search?term=${formattedQuery}${mediaQuery}${explicitQuery}&limit=50`
+        `https://itunes.apple.com/search?term=${formattedQuery}${mediaQuery}${explicitQuery}&limit=20`
       );
 
       if (response.ok) {
@@ -47,14 +47,14 @@ const Catalog = () => {
     }
   };
 
-  const toggleCartItem = async (item: any) => {
-    const isItemInCart = cart.some(cartItem => cartItem.trackId === item.trackId);
-
+  const toggleCartItem = async (item) => {
+    const isItemInCart = cart.some((cartItem) => cartItem.trackId === item.trackId);
+  
     if (isItemInCart) {
-      const itemToDelete = cart.find(cartItem => cartItem.trackId === item.trackId);
+      const itemToDelete = cart.find((cartItem) => cartItem.trackId === item.trackId);
       if (itemToDelete) {
-        await DataStore.delete(CartItem, c => c.trackId('eq', item.trackId));
-        setCart(cart.filter(cartItem => cartItem.trackId !== item.trackId));
+        await DataStore.delete(itemToDelete);
+        setCart(cart.filter((cartItem) => cartItem.trackId !== item.trackId));
       }
     } else {
       const newCartItem = new CartItem({
@@ -67,6 +67,12 @@ const Catalog = () => {
       await DataStore.save(newCartItem);
       setCart([...cart, newCartItem]);
     }
+  };
+
+  const emptyCart = async () => {
+    const deletePromises = cart.map(item => DataStore.delete(item));
+    await Promise.all(deletePromises);
+    setCart([]);
   };
 
   const isInCart = (item: any) => cart.some(cartItem => cartItem.trackId === item.trackId);
@@ -102,14 +108,30 @@ const Catalog = () => {
           </label>
           <button type="submit">Search</button>
         </div>
-        <button onClick={goToCheckout} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-          <FaShoppingCart size={24} />
-          <span>({cart.length})</span>
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <button onClick={goToCheckout} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+            <FaShoppingCart size={24} />
+            <span>({cart.length})</span>
+          </button>
+          <button onClick={emptyCart} style={{ marginLeft: '10px', cursor: 'pointer' }}>
+            Empty Cart
+          </button>
+        </div>
       </form>
-      <div className="gallery">
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+        gap: '16px',
+        padding: '16px'
+      }}>
         {results.map((item: any) => (
-          <div key={item.trackId || item.collectionId} className="gallery-item">
+          <div key={item.trackId || item.collectionId} style={{
+            border: '1px solid #ccc',
+            padding: '16px',
+            textAlign: 'center',
+            borderRadius: '8px',
+            backgroundColor: '#f9f9f9'
+          }}>
             <h3>{item.trackName || item.collectionName}</h3>
             <p>{item.artistName}</p>
             <img src={item.artworkUrl100} alt={item.trackName || item.collectionName} />
