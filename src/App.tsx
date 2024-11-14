@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { getCurrentUser, fetchAuthSession } from 'aws-amplify/auth';
-import { Route, Routes } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import NavBar from "./ui/NavBar";
 import Profile from "./pages/Profile";
 import AboutPage from "./pages/AboutPage";
 import Catalog from "./pages/Catalog";
+import ApplicationPage from './pages/ApplicationPage'; 
+
 
 type UserRole = "admin" | "driver" | "sponsor" | "guest";
-
 
 function App() {
   const { user } = useAuthenticator();
@@ -23,39 +23,37 @@ function App() {
         await getCurrentUser(); // Verify user is authenticated
         const session = await fetchAuthSession();
         
-        // Type assertion to ensure groups is treated as string array
         const groups = (session.tokens?.accessToken?.payload['cognito:groups'] as string[]) || [];
         
-        // Check group membership and set role accordingly
         if (groups.includes("Admin")) setRole("admin");
         else if (groups.includes("Driver")) setRole("driver");
         else if (groups.includes("Sponsor")) setRole("sponsor");
         else setRole("guest");
-
+        
       } catch (error) {
         console.error('Error fetching user role:', error);
-        setRole("guest");
+        setRole(null);
       }
     }
 
     fetchUserRole();
   }, []);
 
-  useEffect(() => {
-    if (!initialNavigationDone) {
-      if (role === "admin") {
-        navigate("/admin-dashboard");
-      } else if (role === "driver") {
-        navigate("/driver-dashboard");
-      } else if (role === "sponsor") {
-        navigate("/sponsor-dashboard");
-      } else {
-        navigate("/unauthorized");
-      }
+    useEffect(() => {
+    if (initialNavigationDone || role === null) return;
 
-      // Set the flag to prevent re-navigation
-      setInitialNavigationDone(true);
+    if (role === "admin") {
+      navigate("/admin-dashboard");
+    } else if (role === "driver") {
+      navigate("/driver-dashboard");
+    } else if (role === "sponsor") {
+      navigate("/sponsor-dashboard");
+    } else {
+      navigate("/profile");
+      alert("Please update your profile information.");
     }
+
+    setInitialNavigationDone(true);
   }, [role, navigate, initialNavigationDone]);
 
   return (
@@ -65,11 +63,11 @@ function App() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
           <div>
             {role === "driver" ? (
-              <h1>Welcome, Driver {user?.signInDetails?.loginId}</h1>
+              <h1>Welcome, Driver {user?.signInDetails?.loginId ?? 'Guest'}</h1>
             ) : role === "admin" ? (
-              <h1>Welcome, Admin {user?.signInDetails?.loginId}</h1>
+              <h1>Welcome, Admin {user?.signInDetails?.loginId ?? 'Guest'}</h1>
             ) : role === "sponsor" ? (
-              <h1>Welcome, Sponsor {user?.signInDetails?.loginId}</h1>
+              <h1>Welcome, Sponsor {user?.signInDetails?.loginId ?? 'Guest'}</h1>
             ) : (
               <h1>Unauthorized</h1>
             )}
@@ -79,6 +77,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/catalog" element={<Catalog />} />
+          {role === "driver" && <Route path="/application" element={<ApplicationPage />} />}
         </Routes>
       </main>
     </>

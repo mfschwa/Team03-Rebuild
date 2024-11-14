@@ -8,7 +8,11 @@ const UserRole = {
   "SPONSOR": "SPONSOR"
 };
 
+<<<<<<< Updated upstream
 const { User, Sponsor, Product, Purchase, PointHistory, AdminProfile, DriverProfile, Report, AuditLog, CartItem } = initSchema(schema);
+=======
+const { User, Sponsor, Product, Purchase, PointHistory, AdminProfile, DriverProfile, Report, AuditLog } = initSchema(schema);
+>>>>>>> Stashed changes
 
 export {
   User,
@@ -20,6 +24,9 @@ export {
   DriverProfile,
   Report,
   AuditLog,
+<<<<<<< Updated upstream
   CartItem,
+=======
+>>>>>>> Stashed changes
   UserRole
 };
