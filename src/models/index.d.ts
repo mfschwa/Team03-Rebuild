@@ -366,7 +366,6 @@ export declare type AuditLog = LazyLoading extends LazyLoadingDisabled ? EagerAu
 
 export declare const AuditLog: (new (init: ModelInit<AuditLog>) => AuditLog) & {
   copyOf(source: AuditLog, mutator: (draft: MutableModel<AuditLog>) => MutableModel<AuditLog> | void): AuditLog;
-<<<<<<< Updated upstream
 }
 
 type EagerCartItem = {
@@ -403,6 +402,4 @@ export declare type CartItem = LazyLoading extends LazyLoadingDisabled ? EagerCa
 
 export declare const CartItem: (new (init: ModelInit<CartItem>) => CartItem) & {
   copyOf(source: CartItem, mutator: (draft: MutableModel<CartItem>) => MutableModel<CartItem> | void): CartItem;
-=======
->>>>>>> Stashed changes
 }

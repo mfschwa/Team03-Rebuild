@@ -17,11 +17,15 @@ export const createUser = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       points
       pointHistory {
         nextToken
+        startedAt
         __typename
       }
       driverProfile {
@@ -30,12 +34,16 @@ export const createUser = /* GraphQL */ `
         applicationStatus
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         userSponsoredDriversId
         driverProfileUserId
         __typename
       }
       purchases {
         nextToken
+        startedAt
         __typename
       }
       adminProfile {
@@ -43,28 +51,38 @@ export const createUser = /* GraphQL */ `
         contactEmail
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         adminProfileUserId
         __typename
       }
       adminReports {
         nextToken
+        startedAt
         __typename
       }
       sponsoredDrivers {
         nextToken
+        startedAt
         __typename
       }
       productCatalog {
         nextToken
+        startedAt
         __typename
       }
       pointConversionRate
       sponsorReports {
         nextToken
+        startedAt
         __typename
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       sponsorUsersId
       userDriverProfileId
       userAdminProfileId
@@ -88,11 +106,15 @@ export const updateUser = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       points
       pointHistory {
         nextToken
+        startedAt
         __typename
       }
       driverProfile {
@@ -101,12 +123,16 @@ export const updateUser = /* GraphQL */ `
         applicationStatus
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         userSponsoredDriversId
         driverProfileUserId
         __typename
       }
       purchases {
         nextToken
+        startedAt
         __typename
       }
       adminProfile {
@@ -114,28 +140,38 @@ export const updateUser = /* GraphQL */ `
         contactEmail
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         adminProfileUserId
         __typename
       }
       adminReports {
         nextToken
+        startedAt
         __typename
       }
       sponsoredDrivers {
         nextToken
+        startedAt
         __typename
       }
       productCatalog {
         nextToken
+        startedAt
         __typename
       }
       pointConversionRate
       sponsorReports {
         nextToken
+        startedAt
         __typename
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       sponsorUsersId
       userDriverProfileId
       userAdminProfileId
@@ -159,11 +195,15 @@ export const deleteUser = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       points
       pointHistory {
         nextToken
+        startedAt
         __typename
       }
       driverProfile {
@@ -172,12 +212,16 @@ export const deleteUser = /* GraphQL */ `
         applicationStatus
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         userSponsoredDriversId
         driverProfileUserId
         __typename
       }
       purchases {
         nextToken
+        startedAt
         __typename
       }
       adminProfile {
@@ -185,28 +229,38 @@ export const deleteUser = /* GraphQL */ `
         contactEmail
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         adminProfileUserId
         __typename
       }
       adminReports {
         nextToken
+        startedAt
         __typename
       }
       sponsoredDrivers {
         nextToken
+        startedAt
         __typename
       }
       productCatalog {
         nextToken
+        startedAt
         __typename
       }
       pointConversionRate
       sponsorReports {
         nextToken
+        startedAt
         __typename
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       sponsorUsersId
       userDriverProfileId
       userAdminProfileId
@@ -224,19 +278,25 @@ export const createSponsor = /* GraphQL */ `
       name
       productCatalog {
         nextToken
+        startedAt
         __typename
       }
       pointConversionRate
       users {
         nextToken
+        startedAt
         __typename
       }
       reports {
         nextToken
+        startedAt
         __typename
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -251,19 +311,25 @@ export const updateSponsor = /* GraphQL */ `
       name
       productCatalog {
         nextToken
+        startedAt
         __typename
       }
       pointConversionRate
       users {
         nextToken
+        startedAt
         __typename
       }
       reports {
         nextToken
+        startedAt
         __typename
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -278,19 +344,25 @@ export const deleteSponsor = /* GraphQL */ `
       name
       productCatalog {
         nextToken
+        startedAt
         __typename
       }
       pointConversionRate
       users {
         nextToken
+        startedAt
         __typename
       }
       reports {
         nextToken
+        startedAt
         __typename
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -308,10 +380,14 @@ export const createProduct = /* GraphQL */ `
       pointsValue
       purchases {
         nextToken
+        startedAt
         __typename
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userProductCatalogId
       sponsorProductCatalogId
       __typename
@@ -331,10 +407,14 @@ export const updateProduct = /* GraphQL */ `
       pointsValue
       purchases {
         nextToken
+        startedAt
         __typename
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userProductCatalogId
       sponsorProductCatalogId
       __typename
@@ -354,10 +434,14 @@ export const deleteProduct = /* GraphQL */ `
       pointsValue
       purchases {
         nextToken
+        startedAt
         __typename
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userProductCatalogId
       sponsorProductCatalogId
       __typename
@@ -380,6 +464,9 @@ export const createPurchase = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -393,6 +480,9 @@ export const createPurchase = /* GraphQL */ `
         pointsValue
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         userProductCatalogId
         sponsorProductCatalogId
         __typename
@@ -402,6 +492,9 @@ export const createPurchase = /* GraphQL */ `
       purchaseDate
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userPurchasesId
       productPurchasesId
       __typename
@@ -424,6 +517,9 @@ export const updatePurchase = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -437,6 +533,9 @@ export const updatePurchase = /* GraphQL */ `
         pointsValue
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         userProductCatalogId
         sponsorProductCatalogId
         __typename
@@ -446,6 +545,9 @@ export const updatePurchase = /* GraphQL */ `
       purchaseDate
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userPurchasesId
       productPurchasesId
       __typename
@@ -468,6 +570,9 @@ export const deletePurchase = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -481,6 +586,9 @@ export const deletePurchase = /* GraphQL */ `
         pointsValue
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         userProductCatalogId
         sponsorProductCatalogId
         __typename
@@ -490,6 +598,9 @@ export const deletePurchase = /* GraphQL */ `
       purchaseDate
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userPurchasesId
       productPurchasesId
       __typename
@@ -512,6 +623,9 @@ export const createPointHistory = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -522,6 +636,9 @@ export const createPointHistory = /* GraphQL */ `
       reason
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userPointHistoryId
       __typename
     }
@@ -543,6 +660,9 @@ export const updatePointHistory = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -553,6 +673,9 @@ export const updatePointHistory = /* GraphQL */ `
       reason
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userPointHistoryId
       __typename
     }
@@ -574,6 +697,9 @@ export const deletePointHistory = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -584,6 +710,9 @@ export const deletePointHistory = /* GraphQL */ `
       reason
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userPointHistoryId
       __typename
     }
@@ -605,6 +734,9 @@ export const createAdminProfile = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -613,6 +745,9 @@ export const createAdminProfile = /* GraphQL */ `
       contactEmail
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       adminProfileUserId
       __typename
     }
@@ -634,6 +769,9 @@ export const updateAdminProfile = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -642,6 +780,9 @@ export const updateAdminProfile = /* GraphQL */ `
       contactEmail
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       adminProfileUserId
       __typename
     }
@@ -663,6 +804,9 @@ export const deleteAdminProfile = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -671,6 +815,9 @@ export const deleteAdminProfile = /* GraphQL */ `
       contactEmail
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       adminProfileUserId
       __typename
     }
@@ -692,6 +839,9 @@ export const createDriverProfile = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -701,6 +851,9 @@ export const createDriverProfile = /* GraphQL */ `
       applicationStatus
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userSponsoredDriversId
       driverProfileUserId
       __typename
@@ -723,6 +876,9 @@ export const updateDriverProfile = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -732,6 +888,9 @@ export const updateDriverProfile = /* GraphQL */ `
       applicationStatus
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userSponsoredDriversId
       driverProfileUserId
       __typename
@@ -754,6 +913,9 @@ export const deleteDriverProfile = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -763,6 +925,9 @@ export const deleteDriverProfile = /* GraphQL */ `
       applicationStatus
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userSponsoredDriversId
       driverProfileUserId
       __typename
@@ -786,6 +951,9 @@ export const createReport = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -797,6 +965,9 @@ export const createReport = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       dateRangeStart
@@ -804,6 +975,9 @@ export const createReport = /* GraphQL */ `
       reportData
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userAdminReportsId
       userSponsorReportsId
       sponsorReportsId
@@ -828,6 +1002,9 @@ export const updateReport = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -839,6 +1016,9 @@ export const updateReport = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       dateRangeStart
@@ -846,6 +1026,9 @@ export const updateReport = /* GraphQL */ `
       reportData
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userAdminReportsId
       userSponsorReportsId
       sponsorReportsId
@@ -870,6 +1053,9 @@ export const deleteReport = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -881,6 +1067,9 @@ export const deleteReport = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       dateRangeStart
@@ -888,6 +1077,9 @@ export const deleteReport = /* GraphQL */ `
       reportData
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userAdminReportsId
       userSponsorReportsId
       sponsorReportsId
@@ -908,6 +1100,9 @@ export const createAuditLog = /* GraphQL */ `
       details
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -925,6 +1120,9 @@ export const updateAuditLog = /* GraphQL */ `
       details
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -942,6 +1140,9 @@ export const deleteAuditLog = /* GraphQL */ `
       details
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -960,6 +1161,9 @@ export const createCartItem = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -978,6 +1182,9 @@ export const updateCartItem = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -996,6 +1203,9 @@ export const deleteCartItem = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }

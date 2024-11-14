@@ -14,11 +14,15 @@ export const getUser = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       points
       pointHistory {
         nextToken
+        startedAt
         __typename
       }
       driverProfile {
@@ -27,12 +31,16 @@ export const getUser = /* GraphQL */ `
         applicationStatus
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         userSponsoredDriversId
         driverProfileUserId
         __typename
       }
       purchases {
         nextToken
+        startedAt
         __typename
       }
       adminProfile {
@@ -40,28 +48,38 @@ export const getUser = /* GraphQL */ `
         contactEmail
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         adminProfileUserId
         __typename
       }
       adminReports {
         nextToken
+        startedAt
         __typename
       }
       sponsoredDrivers {
         nextToken
+        startedAt
         __typename
       }
       productCatalog {
         nextToken
+        startedAt
         __typename
       }
       pointConversionRate
       sponsorReports {
         nextToken
+        startedAt
         __typename
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       sponsorUsersId
       userDriverProfileId
       userAdminProfileId
@@ -85,12 +103,52 @@ export const listUsers = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
         __typename
       }
       nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncUsers = /* GraphQL */ `
+  query SyncUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncUsers(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        username
+        email
+        role
+        points
+        pointConversionRate
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        sponsorUsersId
+        userDriverProfileId
+        userAdminProfileId
+        __typename
+      }
+      nextToken
+      startedAt
       __typename
     }
   }
@@ -102,19 +160,25 @@ export const getSponsor = /* GraphQL */ `
       name
       productCatalog {
         nextToken
+        startedAt
         __typename
       }
       pointConversionRate
       users {
         nextToken
+        startedAt
         __typename
       }
       reports {
         nextToken
+        startedAt
         __typename
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -132,9 +196,43 @@ export const listSponsors = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncSponsors = /* GraphQL */ `
+  query SyncSponsors(
+    $filter: ModelSponsorFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncSponsors(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        pointConversionRate
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
       __typename
     }
   }
@@ -149,10 +247,14 @@ export const getProduct = /* GraphQL */ `
       pointsValue
       purchases {
         nextToken
+        startedAt
         __typename
       }
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userProductCatalogId
       sponsorProductCatalogId
       __typename
@@ -174,11 +276,49 @@ export const listProducts = /* GraphQL */ `
         pointsValue
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         userProductCatalogId
         sponsorProductCatalogId
         __typename
       }
       nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncProducts = /* GraphQL */ `
+  query SyncProducts(
+    $filter: ModelProductFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncProducts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        description
+        price
+        pointsValue
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        userProductCatalogId
+        sponsorProductCatalogId
+        __typename
+      }
+      nextToken
+      startedAt
       __typename
     }
   }
@@ -196,6 +336,9 @@ export const getPurchase = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -209,6 +352,9 @@ export const getPurchase = /* GraphQL */ `
         pointsValue
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         userProductCatalogId
         sponsorProductCatalogId
         __typename
@@ -218,6 +364,9 @@ export const getPurchase = /* GraphQL */ `
       purchaseDate
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userPurchasesId
       productPurchasesId
       __typename
@@ -238,11 +387,48 @@ export const listPurchases = /* GraphQL */ `
         purchaseDate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         userPurchasesId
         productPurchasesId
         __typename
       }
       nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncPurchases = /* GraphQL */ `
+  query SyncPurchases(
+    $filter: ModelPurchaseFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncPurchases(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        productID
+        status
+        purchaseDate
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        userPurchasesId
+        productPurchasesId
+        __typename
+      }
+      nextToken
+      startedAt
       __typename
     }
   }
@@ -260,6 +446,9 @@ export const getPointHistory = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -270,6 +459,9 @@ export const getPointHistory = /* GraphQL */ `
       reason
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userPointHistoryId
       __typename
     }
@@ -289,10 +481,46 @@ export const listPointHistories = /* GraphQL */ `
         reason
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         userPointHistoryId
         __typename
       }
       nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncPointHistories = /* GraphQL */ `
+  query SyncPointHistories(
+    $filter: ModelPointHistoryFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncPointHistories(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        date
+        pointsChange
+        reason
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        userPointHistoryId
+        __typename
+      }
+      nextToken
+      startedAt
       __typename
     }
   }
@@ -310,6 +538,9 @@ export const getAdminProfile = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -318,6 +549,9 @@ export const getAdminProfile = /* GraphQL */ `
       contactEmail
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       adminProfileUserId
       __typename
     }
@@ -335,10 +569,44 @@ export const listAdminProfiles = /* GraphQL */ `
         contactEmail
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         adminProfileUserId
         __typename
       }
       nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncAdminProfiles = /* GraphQL */ `
+  query SyncAdminProfiles(
+    $filter: ModelAdminProfileFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncAdminProfiles(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        contactEmail
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        adminProfileUserId
+        __typename
+      }
+      nextToken
+      startedAt
       __typename
     }
   }
@@ -356,6 +624,9 @@ export const getDriverProfile = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -365,6 +636,9 @@ export const getDriverProfile = /* GraphQL */ `
       applicationStatus
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userSponsoredDriversId
       driverProfileUserId
       __typename
@@ -384,11 +658,47 @@ export const listDriverProfiles = /* GraphQL */ `
         applicationStatus
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         userSponsoredDriversId
         driverProfileUserId
         __typename
       }
       nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncDriverProfiles = /* GraphQL */ `
+  query SyncDriverProfiles(
+    $filter: ModelDriverProfileFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncDriverProfiles(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        contactEmail
+        applicationStatus
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        userSponsoredDriversId
+        driverProfileUserId
+        __typename
+      }
+      nextToken
+      startedAt
       __typename
     }
   }
@@ -407,6 +717,9 @@ export const getReport = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         sponsorUsersId
         userDriverProfileId
         userAdminProfileId
@@ -418,6 +731,9 @@ export const getReport = /* GraphQL */ `
         pointConversionRate
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       dateRangeStart
@@ -425,6 +741,9 @@ export const getReport = /* GraphQL */ `
       reportData
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       userAdminReportsId
       userSponsorReportsId
       sponsorReportsId
@@ -447,12 +766,51 @@ export const listReports = /* GraphQL */ `
         reportData
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         userAdminReportsId
         userSponsorReportsId
         sponsorReportsId
         __typename
       }
       nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncReports = /* GraphQL */ `
+  query SyncReports(
+    $filter: ModelReportFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncReports(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        type
+        dateRangeStart
+        dateRangeEnd
+        reportData
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        userAdminReportsId
+        userSponsorReportsId
+        sponsorReportsId
+        __typename
+      }
+      nextToken
+      startedAt
       __typename
     }
   }
@@ -467,6 +825,9 @@ export const getAuditLog = /* GraphQL */ `
       details
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -486,9 +847,45 @@ export const listAuditLogs = /* GraphQL */ `
         details
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncAuditLogs = /* GraphQL */ `
+  query SyncAuditLogs(
+    $filter: ModelAuditLogFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncAuditLogs(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        user
+        action
+        timestamp
+        details
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
       __typename
     }
   }
@@ -504,6 +901,9 @@ export const getCartItem = /* GraphQL */ `
       imageUrl
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       __typename
     }
   }
@@ -524,9 +924,46 @@ export const listCartItems = /* GraphQL */ `
         imageUrl
         createdAt
         updatedAt
+        _version
+        _deleted
+        _lastChangedAt
         __typename
       }
       nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncCartItems = /* GraphQL */ `
+  query SyncCartItems(
+    $filter: ModelCartItemFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncCartItems(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        trackId
+        name
+        artist
+        price
+        imageUrl
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
       __typename
     }
   }
